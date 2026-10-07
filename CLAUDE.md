@@ -21,9 +21,9 @@
 4. 結果画面のクーポン額（1等100円/2等55円/3等39円）は `COUPON_TIERS` の `amount`。確率は `pickCouponOutcome()`（3%/60%/37%）。
 
 ## ハロウィンLPのFV（看板）
-- `fv-halloween.jpg`（1538×2000、スマホ・PC共通）を全幅表示。上に `fv-items/*.webp`（商品の切り抜き）が横に流れる（`.fv-marquee` / `.fv-track`、32秒ループ）。
+- ページ全体の最大幅は900px（`.wrap`）。`fv-halloween.jpg`（1538×2000、スマホ・PC共通）を全幅表示。上に `fv-items/*.webp`（商品の切り抜き）が横に流れる（`.fv-marquee` / `.fv-track`、32秒ループ）。
 - 流れる帯は画像の高さ10%〜29%。「HAPPY HALLOWEEN」には重ねてOK、下のタイトル（30.5%〜）には重ねない（ユーザー指定）。
-- 切り抜きはmacOS Visionの前景抽出で作成。商品ごとの大きさは各 `<li style="--h:…%">` で調整。
+- 切り抜きはユーザー提供PNG（00425/toy-00043/00461/goods-961/00127/00338）＋macOS Visionの前景抽出（00187/00120/00035/00327）。商品ごとの大きさは各 `<li style="--h:…%">` で調整。
 
 ## 重要な仕様・注意
 - ゲーム→親ページ: iframe高さは `postMessage({type:'madoGameHeight'})` で自動調整。親側のリスナーを消さない。
