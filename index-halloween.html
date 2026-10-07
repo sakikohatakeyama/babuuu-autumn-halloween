@@ -92,6 +92,8 @@
   }
   .fv-banner{ display:block; width:100%; height:auto; }
   .fv-visual{ position:relative; }
+  /* PCだけ看板を幅700pxで中央に（ページ幅900pxはそのまま） */
+  @media (min-width:768px){ .fv-visual{ max-width:700px; margin:0 auto; } }
   /* 「HAPPY HALLOWEEN」には重ねてOK、下のタイトル（画像の高さ30.5%〜）には重ねない */
   .fv-marquee{
     position:absolute;
