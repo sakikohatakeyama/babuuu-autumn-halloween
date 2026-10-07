@@ -6,9 +6,9 @@
 ## ページ構成
 | ファイル | 内容 |
 |---|---|
-| `index.html` | 秋のお出かけ×おうち時間LP（9〜10月前半用）。`game.html`をiframe埋め込み |
+| `autumn.html` | 秋のお出かけ×おうち時間LP（9〜10月前半用、旧index.html）。`game.html`をiframe埋め込み |
 | `game.html` | まどそうじゲーム（窓の曇りをなぞる→クイズ→クーポン抽選）。クーポンURL設定済み |
-| `index-halloween.html` | ハロウィンLP（オレンジ基調）。`game-halloween.html`をiframe埋め込み。商品11点掲載済み |
+| `index.html` | ハロウィンLP（オレンジ基調、公開URLはリポジトリ直下 `/babuuu-autumn-halloween/`）。旧URL `index-halloween.html` は `./` へリダイレクト。`game-halloween.html`をiframe埋め込み。商品11点掲載済み |
 | `game-halloween.html` | 「まほうのかがみ」（game.htmlの鏡版、ハロウィンPNG使用）。**COUPON_URLSが空欄** |
 | `game-kigae.html` / `game-otoroi.html` / `game-gift.html` | 10月用に試作した別ゲーム案（きがえクイズ／神経衰弱／ギフトたたき）。未採用・参考 |
 | `hellowin-*.png` | ハロウィンのクイズ用イラスト7種（kabocha, obake, koumori, neko, majo, candy, kumo） |
@@ -17,7 +17,7 @@
 ## 未完了（次にやること）
 1. `game-halloween.html` 上部の `COUPON_URLS`（first/second/third）に10月分の楽天クーポン取得URLを貼る。空欄の間は「クーポンを受け取る」ボタンは出ない。
 2. ~~仮商品の差し替え~~ 済（2026-10-07）。構成「ハロウィンのごちそうは特等席で」＝ベビーチェア3点＋ラクマグ（bgoods-00127 / bgoods-00461 / bgoods-00187 / bgoods-00338）、「おてつだいも、ひとやすみも これでバッチリ！」＝goods-961（キッズステップ）/ bgoods-00425（ノボルン）/ bgoods-00120 / bgoods-00035 / bgoods-00372（ベビー布団）、「ハロウィンは おうちでごっこあそび」（#items3）＝bgoods-00327（木製サークル）/ toy-00043（ハンバーガー台）。木製コスメ toy-00039 は不採用。goods-961・bgoods-00425は在庫少・口コミ0のため口コミボタンなし、在庫切れになったら差し替え。方針：ハロウィン商品は無いので「おうちで過ごすハロウィン」に合うベビーチェア等を並べる。在庫切れ商品は避ける。
-3. 商品カードは `index.html` のものが完成形（商品詳細ボタン・口コミボタン・タグ3つ・説明2文）。同じ構造で作る。価格・口コミ数は公開前に実ページで再確認する（過去に価格変更あり）。
+3. 商品カードは `autumn.html` のものが完成形（商品詳細ボタン・口コミボタン・タグ3つ・説明2文）。同じ構造で作る。価格・口コミ数は公開前に実ページで再確認する（過去に価格変更あり）。
 4. 結果画面のクーポン額（1等100円/2等55円/3等39円）は `COUPON_TIERS` の `amount`。確率は `pickCouponOutcome()`（3%/60%/37%）。
 
 ## ハロウィンLPのFV（看板）
@@ -37,4 +37,4 @@
 - 「傾いたピル型ラベル」「横スクロールUI」は使わない（ユーザー方針）。大きいタイトルに「、。」を付けない。
 
 ## ローカル確認
-`python -m http.server 8942` をこのフォルダで起動し `http://localhost:8942/index-halloween.html` を開く（`file://`だとiframeが動かない）。
+`python -m http.server 8942` をこのフォルダで起動し `http://localhost:8942/` を開く（`file://`だとiframeが動かない）。
