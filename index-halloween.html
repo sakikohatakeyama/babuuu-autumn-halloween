@@ -301,6 +301,7 @@
   .product-tags li::before{ content:'#'; margin-right:2px; color:var(--orange-deep); }
   .product-actions{
     display:flex;
+    flex-wrap:wrap;
     gap:8px;
     padding:14px 20px 20px;
     border-top:2px solid var(--ink);
@@ -325,7 +326,8 @@
   .product-fav svg{ width:15px; height:15px; color:#E0457B; flex:0 0 auto; }
   .product-fav:hover, .product-reviews:hover{ background:var(--orange-soft); }
   .product-detail{
-    flex:1.4;
+    flex:1 1 100%;
+    font-size:14px !important;
     color:#fff;
     background:var(--orange-deep);
     border:2px solid var(--orange-deep);
