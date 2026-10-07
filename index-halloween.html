@@ -28,12 +28,13 @@
     letter-spacing:.03em;
   }
   .wrap{
-    max-width:750px;
+    max-width:700px;
     margin:0 auto;
     background:var(--paper);
     position:relative;
     box-shadow:0 0 40px rgba(60,20,0,.28);
     overflow:hidden;
+    overflow:clip; /* stickyヘッダーを効かせるためclip */
   }
   img{ max-width:100%; display:block; }
   .num{ font-family:'Jost',Futura,"Hiragino Sans","Hiragino Kaku Gothic ProN","BIZ UDPGothic",Meiryo,sans-serif; font-variant-numeric:tabular-nums; }
@@ -45,6 +46,39 @@
     background:#4B2C7A;
   }
   .site-header img{ height:24px; width:auto; }
+  .site-header{ position:sticky; top:0; z-index:50; }
+  #shopping, #items2, #items3, #game{ scroll-margin-top:56px; }
+  .menu-btn{
+    position:absolute; right:10px; top:50%; transform:translateY(-50%);
+    width:40px; height:40px;
+    border:0; border-radius:10px;
+    background:transparent;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px;
+    cursor:pointer;
+  }
+  .menu-btn span{ display:block; width:22px; height:2.5px; border-radius:2px; background:#FFFFFF; transition:transform .25s, opacity .25s; }
+  .menu-btn[aria-expanded="true"] span:nth-child(1){ transform:translateY(7.5px) rotate(45deg); }
+  .menu-btn[aria-expanded="true"] span:nth-child(2){ opacity:0; }
+  .menu-btn[aria-expanded="true"] span:nth-child(3){ transform:translateY(-7.5px) rotate(-45deg); }
+  .menu-btn:hover{ background:rgba(255,255,255,.12); }
+  .site-menu{
+    position:absolute; left:0; right:0; top:100%;
+    background:#4B2C7A;
+    border-top:1px solid rgba(255,255,255,.18);
+    box-shadow:0 10px 20px rgba(40,10,60,.25);
+  }
+  .site-menu ul{ list-style:none; margin:0; padding:6px 0 10px; }
+  .site-menu a{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:15px 24px;
+    color:#FFFFFF; text-decoration:none;
+    font-size:15px; font-weight:700; letter-spacing:.05em;
+    border-bottom:1px solid rgba(255,255,255,.12);
+  }
+  .site-menu li:last-child a{ border-bottom:0; }
+  .site-menu a::after{ content:'›'; font-size:20px; line-height:1; color:var(--yellow); }
+  .site-menu a.is-ext{ font-size:13px; color:rgba(255,255,255,.85); }
+  .site-menu a:hover{ background:rgba(255,255,255,.08); }
 
   section{ padding:64px 20px; }
   .section-head{
@@ -483,6 +517,18 @@
   <a href="https://www.rakuten.co.jp/babuuu/" target="_blank" rel="noopener">
     <img src="babuuu-logo-white.png" alt="babuuu.">
   </a>
+  <button class="menu-btn" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="site-menu">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="site-menu" id="site-menu" hidden>
+    <ul>
+      <li><a href="#game">ゲームでクーポンをもらう</a></li>
+      <li><a href="#shopping">ハロウィンのごちそうは特等席で</a></li>
+      <li><a href="#items2">おてつだいも、ひとやすみも</a></li>
+      <li><a href="#items3">ハロウィンはおうちでごっこあそび</a></li>
+      <li><a class="is-ext" href="https://www.rakuten.co.jp/babuuu/" target="_blank" rel="noopener">babuuu. ショップトップへ</a></li>
+    </ul>
+  </nav>
 </header>
 
 <section class="fv">
@@ -827,6 +873,18 @@
       items.forEach(function(n){ rio.observe(n); });
     }
   }
+
+  // Header menu
+  var menuBtn = document.querySelector('.menu-btn'), menu = document.getElementById('site-menu');
+  function setMenu(open){
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menuBtn.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+    menu.hidden = !open;
+  }
+  menuBtn.addEventListener('click', function(){ setMenu(menu.hidden); });
+  menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') setMenu(false); });
+  document.addEventListener('click', function(e){ if(!menu.hidden && !e.target.closest('.site-header')) setMenu(false); });
 
   // Smooth anchor jumps can land short on long pages; settle onto the exact spot.
   document.querySelectorAll('a[href^="#"]').forEach(function(a){
