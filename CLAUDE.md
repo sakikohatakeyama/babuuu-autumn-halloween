@@ -1,7 +1,7 @@
 # babuuu 秋・ハロウィン特集（引き継ぎメモ）
 
 楽天ショップ「babuuu」（sid=422856）のキャンペーンページ一式。静的HTMLのみ（ビルド不要）。
-公開: GitHub Pages `https://greentuushou-arch.github.io/babuuu-autumn-ouchi-feature/`（masterにpushで反映、数分かかる）
+公開: GitHub Pages `https://sakikohatakeyama.github.io/babuuu-autumn-halloween/`（リポジトリ sakikohatakeyama/babuuu-autumn-halloween、masterにpushで反映、数分かかる。旧公開先 greentuushou-arch/babuuu-autumn-ouchi-feature は閲覧権限のみ）
 
 ## ページ構成
 | ファイル | 内容 |
