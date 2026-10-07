@@ -120,6 +120,11 @@
     width:auto;
     filter:drop-shadow(0 4px 6px rgba(80,20,0,.35));
   }
+  /* スマホ：スワルン以外を少し大きく、PCと同じくらいの速さ（約25px/秒）に */
+  @media (max-width:767px){
+    .fv-track{ animation-duration:30s; }
+    .fv-track img{ height:var(--hs,var(--h)); }
+  }
   @keyframes fvMarquee{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
   @media (prefers-reduced-motion:reduce){ .fv-track{ animation:none; } }
   .sr-only{ position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
@@ -479,7 +484,7 @@
   <div class="fv-visual">
     <img class="fv-banner" src="fv-halloween.jpg?v=3" width="1600" height="2006" alt="HAPPY HALLOWEEN ハロウィンゲームでクーポンゲット ゲームであそんでおトクなクーポンをもらっちゃおう！" fetchpriority="high">
     <div class="fv-marquee" aria-hidden="true">
-      <ul class="fv-track"><li style="--h:100%"><img src="fv-items/bgoods-00461.webp?v=2" alt="" loading="eager"></li><li style="--h:80%"><img src="fv-items/toy-00043.webp?v=2" alt="" loading="eager"></li><li style="--h:72%"><img src="fv-items/bgoods-00127.webp?v=2" alt="" loading="eager"></li><li style="--h:76%"><img src="fv-items/bgoods-00120.webp?v=2" alt="" loading="eager"></li><li style="--h:62%"><img src="fv-items/goods-961.webp?v=2" alt="" loading="eager"></li><li style="--h:60%"><img src="fv-items/bgoods-00338.webp?v=2" alt="" loading="eager"></li><li style="--h:74%"><img src="fv-items/bgoods-00425.webp?v=2" alt="" loading="eager"></li><li style="--h:100%"><img src="fv-items/bgoods-00461.webp?v=2" alt="" loading="eager"></li><li style="--h:80%"><img src="fv-items/toy-00043.webp?v=2" alt="" loading="eager"></li><li style="--h:72%"><img src="fv-items/bgoods-00127.webp?v=2" alt="" loading="eager"></li><li style="--h:76%"><img src="fv-items/bgoods-00120.webp?v=2" alt="" loading="eager"></li><li style="--h:62%"><img src="fv-items/goods-961.webp?v=2" alt="" loading="eager"></li><li style="--h:60%"><img src="fv-items/bgoods-00338.webp?v=2" alt="" loading="eager"></li><li style="--h:74%"><img src="fv-items/bgoods-00425.webp?v=2" alt="" loading="eager"></li></ul>
+      <ul class="fv-track"><li style="--h:100%"><img src="fv-items/bgoods-00461.webp?v=2" alt="" loading="eager"></li><li style="--h:80%;--hs:92%"><img src="fv-items/toy-00043.webp?v=2" alt="" loading="eager"></li><li style="--h:72%;--hs:86%"><img src="fv-items/bgoods-00127.webp?v=2" alt="" loading="eager"></li><li style="--h:76%;--hs:90%"><img src="fv-items/bgoods-00120.webp?v=2" alt="" loading="eager"></li><li style="--h:62%;--hs:76%"><img src="fv-items/goods-961.webp?v=2" alt="" loading="eager"></li><li style="--h:60%;--hs:74%"><img src="fv-items/bgoods-00338.webp?v=2" alt="" loading="eager"></li><li style="--h:74%;--hs:88%"><img src="fv-items/bgoods-00425.webp?v=2" alt="" loading="eager"></li><li style="--h:100%"><img src="fv-items/bgoods-00461.webp?v=2" alt="" loading="eager"></li><li style="--h:80%;--hs:92%"><img src="fv-items/toy-00043.webp?v=2" alt="" loading="eager"></li><li style="--h:72%;--hs:86%"><img src="fv-items/bgoods-00127.webp?v=2" alt="" loading="eager"></li><li style="--h:76%;--hs:90%"><img src="fv-items/bgoods-00120.webp?v=2" alt="" loading="eager"></li><li style="--h:62%;--hs:76%"><img src="fv-items/goods-961.webp?v=2" alt="" loading="eager"></li><li style="--h:60%;--hs:74%"><img src="fv-items/bgoods-00338.webp?v=2" alt="" loading="eager"></li><li style="--h:74%;--hs:88%"><img src="fv-items/bgoods-00425.webp?v=2" alt="" loading="eager"></li></ul>
     </div>
   </div>
   <div class="fv-actions">
