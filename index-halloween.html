@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ハロウィンゲームでクーポンゲット｜babuuu</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=Jost:wght@700&display=swap');
 
   :root{
     --ink:#2A1A10;
@@ -282,61 +282,57 @@
   }
   .product-name{ margin:0; font-weight:900; font-size:17px; line-height:1.6; letter-spacing:.04em; }
   .product-desc{ margin:0; font-size:14px; line-height:1.95; letter-spacing:.04em; }
-  .product-tags{ margin:0; padding:0; list-style:none; display:flex; flex-wrap:wrap; gap:6px; }
-  .product-tags li{
-    font-size:11.5px;
-    font-weight:700;
-    color:var(--ink);
-    background:var(--orange);
-    border-radius:999px;
-    padding:4px 11px;
+  .product-price{ margin:0; display:flex; flex-wrap:wrap; align-items:baseline; gap:2px 6px; color:var(--ink); }
+  .product-price .num{ font-family:'Jost',sans-serif; font-weight:700; font-size:30px; line-height:1.1; letter-spacing:.01em; }
+  .product-price .yen{ font-weight:900; font-size:16px; margin-left:-3px; }
+  .product-price .tax{ font-size:11px; font-weight:700; color:#7A6656; }
+  .product-free{
+    align-self:center;
+    font-size:11.5px; font-weight:900; letter-spacing:.04em;
+    color:var(--orange-deep);
+    border:1.5px solid var(--orange-deep);
+    border-radius:4px;
+    padding:2px 7px;
+    line-height:1.5;
   }
-  .product-tags li:nth-child(2){ background:var(--purple); color:#fff; }
-  .product-tags li:nth-child(3){ background:var(--ink); color:#fff; }
-  .product-meta{
+  /* 特徴は「#タグ」のテキスト表示（ボタンに見えないように） */
+  .product-tags{ margin:0; padding:0; list-style:none; display:flex; flex-wrap:wrap; gap:4px 14px; }
+  .product-tags li{ font-size:13px; font-weight:700; color:var(--purple); letter-spacing:.03em; }
+  .product-tags li::before{ content:'#'; margin-right:2px; color:var(--orange-deep); }
+  .product-actions{
     display:flex;
-    flex-direction:column;
-    align-items:stretch;
-    gap:10px;
+    gap:8px;
     padding:14px 20px 20px;
     border-top:2px solid var(--ink);
   }
-  .product-price{ font-weight:700; font-size:17px; }
-  .product-price .num{ font-size:19px; }
-  .product-actions{ display:flex; gap:8px; }
-  .product-detail{
-    flex:1; min-width:0;
-    display:block;
+  .product-actions a{
+    min-width:0;
+    display:inline-flex; align-items:center; justify-content:center; gap:5px;
     text-align:center;
     font-size:13px;
     font-weight:900;
+    border-radius:999px;
+    padding:11px 8px;
+    white-space:nowrap;
+    text-decoration:none;
+  }
+  .product-fav, .product-reviews{
+    flex:1;
     color:var(--ink);
     background:var(--paper);
     border:2px solid var(--ink);
-    border-radius:999px;
-    padding:10px 6px;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-    text-decoration:none;
   }
-  .product-reviews{
-    flex:1.5; min-width:0;
-    display:block;
-    text-align:center;
-    font-size:13.5px;
-    font-weight:900;
+  .product-fav svg{ width:15px; height:15px; color:#E0457B; flex:0 0 auto; }
+  .product-fav:hover, .product-reviews:hover{ background:var(--orange-soft); }
+  .product-detail{
+    flex:1.4;
     color:#fff;
-    background:var(--purple);
-    border-radius:999px;
-    padding:10px 6px;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-    text-decoration:none;
+    background:var(--orange-deep);
+    border:2px solid var(--orange-deep);
+    box-shadow:0 3px 0 var(--ink);
   }
-  .product-reviews:hover{ background:var(--purple-deep); }
-  .product-reviews .num{ font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","BIZ UDPGothic",Meiryo,sans-serif; }
+  .product-detail::after{ content:'›'; font-size:17px; line-height:1; margin-left:2px; }
+  .product-detail:hover{ background:var(--orange); border-color:var(--orange); }
   @media (min-width:600px){
     .product-link{ flex-direction:row; }
     .product-photo{
@@ -348,10 +344,9 @@
     }
     .product-body{ padding:22px 26px; }
     .product-name{ font-size:18px; }
-    .product-meta{ flex-direction:row; align-items:center; justify-content:space-between; }
-    .product-actions{ flex:0 0 auto; }
-    .product-detail{ flex:0 0 auto; padding:11px 20px; }
-    .product-reviews{ flex:0 0 auto; padding:11px 24px; }
+    .product-actions{ justify-content:flex-end; }
+    .product-actions a{ flex:0 0 auto; padding:11px 18px; }
+    .product-detail{ padding:11px 26px !important; }
   }
 
   /* ---------- Reveal-in animation ---------- */
@@ -515,16 +510,15 @@
           <div class="product-photo"><img src="https://shop.r10s.jp/babuuu/cabinet/1004kd/default/s1/4945680207348_s1.jpg" alt="リッチェル 2WAYごきげんチェア KR" loading="lazy"></div>
           <div class="product-body">
             <p class="product-name">リッチェル 2WAYごきげんチェア KR</p>
+            <p class="product-price"><span class="num">6,930</span><span class="yen">円</span><span class="tax">税込</span><span class="product-free">送料無料</span></p>
             <p class="product-desc">床に置いてローチェアに、大人の椅子に付けてブースターチェアにもなる2WAY。座面の高さは2段階で、成長に合わせて長く使えます。</p>
             <ul class="product-tags"><li>2WAY</li><li>テーブル付き</li><li>抗菌加工</li></ul>
           </div>
         </a>
-        <div class="product-meta">
-          <span class="product-price"><span class="num">6,930</span>円</span>
-          <div class="product-actions">
-            <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00127/" target="_blank" rel="noopener">商品詳細へ</a>
-            <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10000592/1.1/" target="_blank" rel="noopener">口コミ<span class="num">37</span>件を<span class="check">check！</span></a>
-          </div>
+        <div class="product-actions">
+          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10000592&amp;itype=1" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>お気に入り</a>
+          <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10000592/1.1/" target="_blank" rel="noopener">口コミ<span class="num">37</span>件</a>
+          <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00127/" target="_blank" rel="noopener">商品ページへ</a>
         </div>
       </div>
       <div class="product-card reveal">
@@ -532,16 +526,15 @@
           <div class="product-photo"><img src="https://shop.r10s.jp/babuuu/cabinet/1004kd/default/s1/4930969225236_s1.jpg" alt="カトージ 木製ハイチェア スワルン" loading="lazy"></div>
           <div class="product-body">
             <p class="product-name">カトージ 木製ハイチェア スワルン</p>
+            <p class="product-price"><span class="num">6,990</span><span class="yen">円</span><span class="tax">税込</span><span class="product-free">送料無料</span></p>
             <p class="product-desc">テーブルが身体にフィットして、立ち上がりにくい木製ハイチェア。クッション付きで、ごちそうの時間も ごきげんに座っていられます。</p>
             <ul class="product-tags"><li>木製</li><li>クッション付き</li><li>立ち上がりにくい</li></ul>
           </div>
         </a>
-        <div class="product-meta">
-          <span class="product-price"><span class="num">6,990</span>円</span>
-          <div class="product-actions">
-            <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00461/" target="_blank" rel="noopener">商品詳細へ</a>
-            <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10001140/1.1/" target="_blank" rel="noopener">口コミ<span class="num">3</span>件を<span class="check">check！</span></a>
-          </div>
+        <div class="product-actions">
+          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10001140&amp;itype=1" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>お気に入り</a>
+          <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10001140/1.1/" target="_blank" rel="noopener">口コミ<span class="num">3</span>件</a>
+          <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00461/" target="_blank" rel="noopener">商品ページへ</a>
         </div>
       </div>
       <div class="product-card reveal">
@@ -549,16 +542,15 @@
           <div class="product-photo"><img src="https://shop.r10s.jp/babuuu/cabinet/kd0000/yamatoya/s1/4539066036709_s1.jpg" alt="大和屋 すくすくチェア GL" loading="lazy"></div>
           <div class="product-body">
             <p class="product-name">大和屋 すくすくチェア GL</p>
+            <p class="product-price"><span class="num">19,800</span><span class="yen">円</span><span class="tax">税込</span><span class="product-free">送料無料</span></p>
             <p class="product-desc">大和屋いちばん人気の定番チェア。生後7か月ごろから大人まで、高さを調整しながら ずっと家族のテーブルで使えます。</p>
             <ul class="product-tags"><li>高さ調整</li><li>大人まで使える</li><li>木製</li></ul>
           </div>
         </a>
-        <div class="product-meta">
-          <span class="product-price"><span class="num">19,800</span>円</span>
-          <div class="product-actions">
-            <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00187/" target="_blank" rel="noopener">商品詳細へ</a>
-            <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10000649/1.1/" target="_blank" rel="noopener">口コミ<span class="num">85</span>件を<span class="check">check！</span></a>
-          </div>
+        <div class="product-actions">
+          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10000649&amp;itype=1" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>お気に入り</a>
+          <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10000649/1.1/" target="_blank" rel="noopener">口コミ<span class="num">85</span>件</a>
+          <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00187/" target="_blank" rel="noopener">商品ページへ</a>
         </div>
       </div>
       <div class="product-card reveal">
@@ -566,16 +558,15 @@
           <div class="product-photo"><img src="https://shop.r10s.jp/babuuu/cabinet/1004kd/default/s1/4972990199377_s1.jpg" alt="コンビ ラクマグ プレミアムセット R" loading="lazy"></div>
           <div class="product-body">
             <p class="product-name">コンビ ラクマグ プレミアムセット R</p>
+            <p class="product-price"><span class="num">4,990</span><span class="yen">円</span><span class="tax">税込</span></p>
             <p class="product-desc">成長に合わせてパーツを付け替えながら、自分で飲む練習ができるマグセット。ハロウィンの かぼちゃジュースも、自分で ごくごく。</p>
             <ul class="product-tags"><li>自分で飲める</li><li>ステップアップ</li><li>ギフトにも</li></ul>
           </div>
         </a>
-        <div class="product-meta">
-          <span class="product-price"><span class="num">4,990</span>円</span>
-          <div class="product-actions">
-            <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00338/" target="_blank" rel="noopener">商品詳細へ</a>
-            <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10000936/1.1/" target="_blank" rel="noopener">口コミ<span class="num">7</span>件を<span class="check">check！</span></a>
-          </div>
+        <div class="product-actions">
+          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10000936&amp;itype=1" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>お気に入り</a>
+          <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10000936/1.1/" target="_blank" rel="noopener">口コミ<span class="num">7</span>件</a>
+          <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00338/" target="_blank" rel="noopener">商品ページへ</a>
         </div>
       </div>
     </div>
@@ -652,15 +643,14 @@
           <div class="product-photo"><img src="https://shop.r10s.jp/babuuu/cabinet/1004kd/default/s1/goods-961_s1.jpg" alt="キッズステップ 木製 tina" loading="lazy"></div>
           <div class="product-body">
             <p class="product-name">キッズステップ 木製 tina</p>
+            <p class="product-price"><span class="num">5,500</span><span class="yen">円</span><span class="tax">税込</span><span class="product-free">送料無料</span></p>
             <p class="product-desc">天然木の2段ステップで、キッチンや洗面所に 手がとどく高さに。おばけクッキーづくりのお手伝いも、ひとりで のぼって できます。</p>
             <ul class="product-tags"><li>2段</li><li>天然木</li><li>くすみカラー</li></ul>
           </div>
         </a>
-        <div class="product-meta">
-          <span class="product-price"><span class="num">5,500</span>円</span>
-          <div class="product-actions">
-            <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/goods-961/" target="_blank" rel="noopener">商品詳細へ</a>
-          </div>
+        <div class="product-actions">
+          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10000122&amp;itype=1" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>お気に入り</a>
+          <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/goods-961/" target="_blank" rel="noopener">商品ページへ</a>
         </div>
       </div>
       <div class="product-card reveal">
@@ -668,15 +658,14 @@
           <div class="product-photo"><img src="https://shop.r10s.jp/babuuu/cabinet/1004kd/default/s1/4930969176033_s1.jpg" alt="カトージ 2WAYステップ&amp;チェア ノボルン" loading="lazy"></div>
           <div class="product-body">
             <p class="product-name">カトージ 2WAYステップ&amp;チェア ノボルン</p>
+            <p class="product-price"><span class="num">4,378</span><span class="yen">円</span><span class="tax">税込</span></p>
             <p class="product-desc">組み替えるだけで、ステップにも 椅子にもなる2WAY。生後7か月ごろから、大人まで使えて（耐荷重80kg）、「できた！」がどんどん増えます。</p>
             <ul class="product-tags"><li>2WAY</li><li>組み替え可能</li><li>大人も使える</li></ul>
           </div>
         </a>
-        <div class="product-meta">
-          <span class="product-price"><span class="num">4,378</span>円</span>
-          <div class="product-actions">
-            <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00425/" target="_blank" rel="noopener">商品詳細へ</a>
-          </div>
+        <div class="product-actions">
+          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10001087&amp;itype=1" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>お気に入り</a>
+          <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00425/" target="_blank" rel="noopener">商品ページへ</a>
         </div>
       </div>
       <div class="product-card reveal">
@@ -684,16 +673,15 @@
           <div class="product-photo"><img src="https://shop.r10s.jp/babuuu/cabinet/1004kd/default/s1/4945680204781_s1.jpg" alt="リッチェル バウンシングシート N" loading="lazy"></div>
           <div class="product-body">
             <p class="product-name">リッチェル バウンシングシート N</p>
+            <p class="product-price"><span class="num">10,000</span><span class="yen">円</span><span class="tax">税込</span><span class="product-free">送料無料</span></p>
             <p class="product-desc">赤ちゃんの動きに合わせて、自然にゆらゆら揺れるバウンサー。通気性のよいメッシュ生地で、シートは洗えて折りたたみもできます。</p>
             <ul class="product-tags"><li>自然なゆれ</li><li>メッシュ生地</li><li>洗える</li></ul>
           </div>
         </a>
-        <div class="product-meta">
-          <span class="product-price"><span class="num">10,000</span>円</span>
-          <div class="product-actions">
-            <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00120/" target="_blank" rel="noopener">商品詳細へ</a>
-            <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10000599/1.1/" target="_blank" rel="noopener">口コミ<span class="num">31</span>件を<span class="check">check！</span></a>
-          </div>
+        <div class="product-actions">
+          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10000599&amp;itype=1" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>お気に入り</a>
+          <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10000599/1.1/" target="_blank" rel="noopener">口コミ<span class="num">31</span>件</a>
+          <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00120/" target="_blank" rel="noopener">商品ページへ</a>
         </div>
       </div>
       <div class="product-card reveal">
@@ -701,16 +689,15 @@
           <div class="product-photo"><img src="https://shop.r10s.jp/babuuu/cabinet/1004kd/default/s1/4972990194945_s1.jpg" alt="コンビ ネムリラ Fit AQ" loading="lazy"></div>
           <div class="product-body">
             <p class="product-name">コンビ ネムリラ Fit AQ</p>
+            <p class="product-price"><span class="num">25,080</span><span class="yen">円</span><span class="tax">税込</span><span class="product-free">送料無料</span></p>
             <p class="product-desc">新生児から使える、手動スイングのベビーラック。お昼寝にも お食事にも使えて、シートは丸洗いできます。</p>
             <ul class="product-tags"><li>新生児から</li><li>手動スイング</li><li>丸洗いOK</li></ul>
           </div>
         </a>
-        <div class="product-meta">
-          <span class="product-price"><span class="num">25,080</span>円</span>
-          <div class="product-actions">
-            <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00035/" target="_blank" rel="noopener">商品詳細へ</a>
-            <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10000030/1.1/" target="_blank" rel="noopener">口コミ<span class="num">56</span>件を<span class="check">check！</span></a>
-          </div>
+        <div class="product-actions">
+          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10000030&amp;itype=1" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>お気に入り</a>
+          <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10000030/1.1/" target="_blank" rel="noopener">口コミ<span class="num">56</span>件</a>
+          <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00035/" target="_blank" rel="noopener">商品ページへ</a>
         </div>
       </div>
       <div class="product-card reveal">
@@ -718,16 +705,15 @@
           <div class="product-photo"><img src="https://shop.r10s.jp/babuuu/cabinet/1004kd/default/s1/4930969055000_s1.jpg" alt="カトージ ベビー布団セット" loading="lazy"></div>
           <div class="product-body">
             <p class="product-name">カトージ ベビー布団セット</p>
+            <p class="product-price"><span class="num">7,700</span><span class="yen">円</span><span class="tax">税込</span><span class="product-free">送料無料</span></p>
             <p class="product-desc">敷き布団・掛け布団・防水シーツなどがそろった、持ち運べるベビー布団セット。床置きでもベビーベッドでも、お昼寝スペースが すぐ つくれます。</p>
             <ul class="product-tags"><li>5点セット</li><li>床置きOK</li><li>持ち運べる</li></ul>
           </div>
         </a>
-        <div class="product-meta">
-          <span class="product-price"><span class="num">7,700</span>円</span>
-          <div class="product-actions">
-            <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00372/" target="_blank" rel="noopener">商品詳細へ</a>
-            <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10001004/1.1/" target="_blank" rel="noopener">口コミ<span class="num">21</span>件を<span class="check">check！</span></a>
-          </div>
+        <div class="product-actions">
+          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10001004&amp;itype=1" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>お気に入り</a>
+          <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10001004/1.1/" target="_blank" rel="noopener">口コミ<span class="num">21</span>件</a>
+          <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00372/" target="_blank" rel="noopener">商品ページへ</a>
         </div>
       </div>
     </div>
@@ -747,16 +733,15 @@
           <div class="product-photo"><img src="https://shop.r10s.jp/babuuu/cabinet/1004kd/default/s1/4930969630047_s1.jpg" alt="カトージ 木製ベビーサークル" loading="lazy"></div>
           <div class="product-body">
             <p class="product-name">カトージ 木製ベビーサークル</p>
+            <p class="product-price"><span class="num">6,490</span><span class="yen">円</span><span class="tax">税込</span></p>
             <p class="product-desc">工具いらずのジョイント式で、長方形やL字など お部屋に合わせて置ける木製サークル。仮装したまま あそんでも、安心のスペースに。</p>
             <ul class="product-tags"><li>木製</li><li>工具不要</li><li>形を変えられる</li></ul>
           </div>
         </a>
-        <div class="product-meta">
-          <span class="product-price"><span class="num">6,490</span>円</span>
-          <div class="product-actions">
-            <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00327/" target="_blank" rel="noopener">商品詳細へ</a>
-            <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10000918/1.1/" target="_blank" rel="noopener">口コミ<span class="num">34</span>件を<span class="check">check！</span></a>
-          </div>
+        <div class="product-actions">
+          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10000918&amp;itype=1" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>お気に入り</a>
+          <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10000918/1.1/" target="_blank" rel="noopener">口コミ<span class="num">34</span>件</a>
+          <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00327/" target="_blank" rel="noopener">商品ページへ</a>
         </div>
       </div>
       <div class="product-card reveal">
@@ -764,16 +749,15 @@
           <div class="product-photo"><img src="https://shop.r10s.jp/babuuu/cabinet/1004kd/default/s1/6941083_s1.jpg" alt="お店屋さんごっこ ハンバーガー台＆注文台セット" loading="lazy"></div>
           <div class="product-body">
             <p class="product-name">お店屋さんごっこ ハンバーガー台＆注文台セット</p>
+            <p class="product-price"><span class="num">1,800</span><span class="yen">円</span><span class="tax">税込</span><span class="product-free">送料無料</span></p>
             <p class="product-desc">ハンバーガー台と注文台がセットになった、おしゃれなお店屋さんセット。おうちのハロウィンパーティーで、ハンバーガー屋さんごっこ。</p>
             <ul class="product-tags"><li>ごっこ遊び</li><li>おままごと</li><li>プレゼントにも</li></ul>
           </div>
         </a>
-        <div class="product-meta">
-          <span class="product-price"><span class="num">1,800</span>円</span>
-          <div class="product-actions">
-            <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/toy-00043/" target="_blank" rel="noopener">商品詳細へ</a>
-            <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10000537/1.1/" target="_blank" rel="noopener">口コミ<span class="num">9</span>件を<span class="check">check！</span></a>
-          </div>
+        <div class="product-actions">
+          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10000537&amp;itype=1" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>お気に入り</a>
+          <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10000537/1.1/" target="_blank" rel="noopener">口コミ<span class="num">9</span>件</a>
+          <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/toy-00043/" target="_blank" rel="noopener">商品ページへ</a>
         </div>
       </div>
     </div>
