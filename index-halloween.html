@@ -28,7 +28,7 @@
     letter-spacing:.03em;
   }
   .wrap{
-    max-width:900px;
+    max-width:800px;
     margin:0 auto;
     background:var(--paper);
     position:relative;
@@ -92,8 +92,6 @@
   }
   .fv-banner{ display:block; width:100%; height:auto; }
   .fv-visual{ position:relative; }
-  /* PCだけ看板を幅700pxで中央に（ページ幅900pxはそのまま） */
-  @media (min-width:768px){ .fv-visual{ max-width:700px; margin:0 auto; } }
   /* 「HAPPY HALLOWEEN」には重ねてOK、下のタイトル（画像の高さ30.5%〜）には重ねない */
   .fv-marquee{
     position:absolute;
@@ -110,13 +108,13 @@
     height:100%;
     margin:0; padding:0;
     list-style:none;
-    animation:fvMarquee 32s linear infinite;
+    animation:fvMarquee 56s linear infinite;
   }
   .fv-track li{
     height:100%;
     display:flex;
     align-items:flex-end;
-    padding-right:clamp(16px,5vw,36px);
+    padding-right:clamp(28px,8vw,64px);
   }
   .fv-track img{
     height:var(--h);
