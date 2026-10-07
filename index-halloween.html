@@ -84,14 +84,14 @@
 
   /* ---------- FV ---------- */
   .fv{
-    padding:36px 20px 30px;
+    padding:0 0 30px;
     text-align:center;
-    background:
-      radial-gradient(circle at 50% 50%, rgba(255,255,255,.18) 0 3px, transparent 3.5px) 0 0/22px 22px,
-      linear-gradient(180deg,#FF9A2E,#FF7A00);
+    background:#D33E04;
     color:#FFFFFF;
     position:relative;
   }
+  .fv-banner{ display:block; width:100%; height:auto; }
+  .sr-only{ position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
   .fv-kicker{
     display:inline-block;
     margin:0 0 14px;
@@ -137,7 +137,8 @@
   @media (prefers-reduced-motion:reduce){ .fv-art .float{ animation:none; } }
 
   .fv-actions{
-    margin-top:18px;
+    margin-top:22px;
+    padding:0 16px;
     display:flex;
     flex-wrap:wrap;
     align-items:center;
@@ -428,7 +429,7 @@
 
   @media (max-width:600px){
     section{ padding:48px 16px; }
-    .fv{ padding:30px 16px 26px; }
+    .fv{ padding:0 0 26px; }
     .product-group{ margin-bottom:36px; }
   }
 </style>
@@ -443,16 +444,8 @@
 </header>
 
 <section class="fv">
-  <p class="fv-kicker">TRICK OR TREAT</p>
-  <h1>ハロウィンゲームで<br>クーポンゲット</h1>
-  <p class="fv-sub">おやこで ゲームを あそんで、<br>おトクな クーポンを もらおう</p>
-  <div class="fv-art">
-    <img class="main" src="hellown-23.png" alt="HAPPY HALLOWEEN">
-    <img class="float f-obake" src="hellowin-obake.png" alt="">
-    <img class="float f-kabocha" src="hellowin-kabocha.png" alt="">
-    <img class="float f-koumori" src="hellowin-koumori.png" alt="">
-    <img class="float f-candy" src="hellowin-candy.png" alt="">
-  </div>
+  <h1 class="sr-only">ハロウィンゲームでクーポンゲット</h1>
+  <img class="fv-banner" src="fv-halloween.jpg" width="1538" height="2000" alt="HAPPY HALLOWEEN ハロウィンゲームでクーポンゲット ゲームであそんでおトクなクーポンをもらっちゃおう！" fetchpriority="high">
   <div class="fv-actions">
     <a class="fv-scroll is-play" href="#game">ゲームでクーポンをもらう
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 4v16M5 13l7 7 7-7"/></svg>
