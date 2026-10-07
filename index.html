@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>秋のお出かけ、雨の日のおうち。｜babuuu</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700;900&family=Jost:wght@500;600&display=swap');
+
+  :root{
+    --ink:#181613;
+    --paper:#FFFFFF;
+    --blue:#1E9FD6;
+    --yellow:#FFC300;
+    --pink:#FF4C86;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--yellow);
+    color:var(--ink);
+    font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif;
+  }
+  .wrap{
+    max-width:760px;
+    margin:0 auto;
+    background:var(--paper);
+    position:relative;
+    box-shadow:0 0 40px rgba(0,0,0,.18);
+    overflow:hidden;
+  }
+  img{ max-width:100%; display:block; }
+  .num{ font-family:'Jost',sans-serif; font-variant-numeric:tabular-nums; }
+
+  .site-header{
+    padding:14px 20px;
+    display:flex;
+    justify-content:center;
+    background:var(--paper);
+    border-bottom:1px solid #EEEEEE;
+  }
+  .site-header img{ height:24px; width:auto; }
+
+  section{ padding:64px 20px; }
+  .section-head{
+    max-width:640px;
+    margin:0 auto 40px;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .eyebrow{
+    margin:0;
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:.08em;
+    color:var(--pink);
+  }
+  .section-head h2{
+    margin:0;
+    font-family:'Zen Maru Gothic',sans-serif;
+    font-weight:900;
+    font-size:clamp(26px,5.5vw,36px);
+    text-wrap:balance;
+  }
+  .section-head h2.title-lg{
+    font-size:clamp(30px,8vw,42px);
+    line-height:1.35;
+  }
+  .section-head .lead{
+    margin:0;
+    font-size:15.5px;
+    line-height:1.9;
+    color:var(--ink);
+    max-width:34ch;
+    margin-inline:auto;
+  }
+
+  /* ---------- FV ---------- */
+  .fv{ padding:0; }
+  .fv-photo{ display:block; width:100%; height:auto; }
+
+  .fv-actions{
+    padding:18px 20px 22px;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    background:var(--paper);
+  }
+  .fv-scroll{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    color:var(--ink);
+    text-decoration:none;
+    font-size:14px;
+    font-weight:700;
+    border:2px solid var(--ink);
+    border-radius:999px;
+    padding:11px 22px;
+  }
+  .fv-scroll svg{ width:11px; height:11px; }
+  .fv-scroll.is-play{
+    background:var(--pink);
+    border-color:var(--pink);
+    color:#FFFFFF;
+  }
+
+  /* ---------- Outing ---------- */
+  .outing{ background:var(--paper); }
+  .outing-kicker{
+    position:relative;
+    align-self:center;
+    margin:0;
+    background:var(--yellow);
+    color:var(--ink);
+    font-weight:900;
+    font-size:16px;
+    line-height:1.6;
+    padding:7px 18px;
+    border-radius:10px;
+  }
+  .outing-kicker::after{
+    content:'';
+    position:absolute;
+    left:50%;
+    bottom:-9px;
+    transform:translateX(-50%);
+    width:0;
+    height:0;
+    border-left:9px solid transparent;
+    border-right:9px solid transparent;
+    border-top:10px solid var(--yellow);
+  }
+  @media (min-width:600px){
+    .outing-kicker{ white-space:nowrap; }
+    .outing-kicker .mobile-break{ display:none; }
+  }
+  .product-group{ max-width:960px; margin:0 auto 48px; }
+  .group-photo{
+    margin:0 -20px 28px;
+  }
+  .group-photo img{ width:100%; height:auto; display:block; }
+  .product-group:last-child{ margin-bottom:0; }
+  .group-label{
+    margin:0 0 18px;
+    font-weight:900;
+    font-size:19px;
+    line-height:1.5;
+    color:var(--ink);
+    padding-bottom:10px;
+    border-bottom:3px solid var(--ink);
+  }
+  .product-grid{
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+  }
+  .product-card{
+    display:flex;
+    flex-direction:column;
+    background:var(--paper);
+    border:2.5px solid var(--ink);
+    border-radius:20px;
+    overflow:hidden;
+  }
+  .product-link{
+    display:flex;
+    flex-direction:column;
+    flex:1;
+    min-width:0;
+    text-decoration:none;
+    color:inherit;
+  }
+  .product-photo{
+    width:100%;
+    max-width:100%;
+    aspect-ratio:1/1;
+    background:#FFFFFF;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+    border-bottom:2.5px solid var(--ink);
+    border-radius:17px 17px 0 0;
+  }
+  .product-photo img{ width:100%; height:100%; object-fit:contain; }
+  .product-body{
+    padding:18px 20px 14px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    flex:1;
+    justify-content:center;
+  }
+  .product-name{
+    margin:0;
+    font-weight:900;
+    font-size:17px;
+    line-height:1.5;
+  }
+  .product-desc{
+    margin:0;
+    font-size:14px;
+    line-height:1.8;
+    color:var(--ink);
+  }
+  .product-tags{
+    margin:0;
+    padding:0;
+    list-style:none;
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+  }
+  .product-tags li{
+    font-size:11.5px;
+    font-weight:700;
+    color:var(--ink);
+    background:var(--yellow);
+    border-radius:999px;
+    padding:4px 11px;
+  }
+  .product-tags li:nth-child(2){ background:var(--pink); color:#fff; }
+  .product-tags li:nth-child(3){ background:var(--blue); color:#fff; }
+  .product-meta{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    gap:10px;
+    padding:14px 20px 20px;
+    border-top:2px solid var(--ink);
+  }
+  .product-price{ font-weight:700; font-size:17px; }
+  .product-price .num{ font-size:19px; }
+  .product-actions{
+    display:flex;
+    gap:8px;
+  }
+  .product-detail{
+    flex:1;
+    min-width:0;
+    display:block;
+    text-align:center;
+    font-size:13px;
+    font-weight:900;
+    color:var(--ink);
+    background:var(--paper);
+    border:2px solid var(--ink);
+    border-radius:999px;
+    padding:10px 6px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    text-decoration:none;
+  }
+  .product-reviews{
+    flex:1.5;
+    min-width:0;
+    display:block;
+    text-align:center;
+    font-size:13.5px;
+    font-weight:900;
+    color:#fff;
+    background:var(--pink);
+    border-radius:999px;
+    padding:10px 6px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    text-decoration:none;
+    cursor:pointer;
+  }
+  .product-reviews:hover{ background:#E8397A; }
+  .product-reviews .num{ font-family:'Jost',sans-serif; }
+  @media (min-width:600px){
+    .product-link{ flex-direction:row; }
+    .product-photo{
+      width:280px;
+      flex:0 0 280px;
+      border-bottom:none;
+      border-right:2.5px solid var(--ink);
+      border-radius:17px 0 0 17px;
+    }
+    .product-body{ padding:22px 26px; }
+    .product-name{ font-size:18px; }
+    .product-meta{ flex-direction:row; align-items:center; justify-content:space-between; }
+    .product-actions{ flex:0 0 auto; }
+    .product-detail{ flex:0 0 auto; padding:11px 20px; }
+    .product-reviews{ flex:0 0 auto; padding:11px 24px; }
+  }
+
+  /* ---------- Reveal-in animation ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(16px);
+    transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);
+  }
+  .reveal.in{ opacity:1; transform:none; }
+  @media (prefers-reduced-motion:reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+  }
+
+  /* ---------- Transition ---------- */
+  .transition{
+    padding:0;
+    position:relative;
+    min-height:300px;
+    overflow:hidden;
+  }
+  .transition-sky{ position:absolute; inset:0; }
+  .transition-sky svg{ display:block; width:100%; height:100%; }
+  .sunny-layer{ opacity:1; transition:opacity 1.1s ease; }
+  .rain-layer{ opacity:0; transition:opacity 1.1s ease; }
+  .transition.is-active .sunny-layer{ opacity:0; }
+  .transition.is-active .rain-layer{ opacity:1; }
+  .raindrop{
+    stroke:#EAF3FA;
+    stroke-width:3;
+    stroke-linecap:round;
+    opacity:0;
+    animation:dropFall 1.1s linear infinite;
+  }
+  .transition.is-active .raindrop{ opacity:.75; }
+  @keyframes dropFall{
+    0%{ transform:translateY(-24px); opacity:0; }
+    15%{ opacity:.8; }
+    100%{ transform:translateY(30px); opacity:0; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .raindrop{ animation:none; opacity:.6; }
+    .sunny-layer, .rain-layer{ transition:none; }
+  }
+  .transition-text{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    text-align:center;
+    opacity:0;
+    transition:opacity 1.1s ease;
+  }
+  .transition-text .eyebrow{ color:#FFF3CC; }
+  .transition-text h2{
+    margin:0;
+    font-family:'Zen Maru Gothic',sans-serif;
+    font-weight:900;
+    font-size:clamp(24px,5vw,34px);
+    color:#FFFFFF;
+    text-wrap:balance;
+    padding:0 20px;
+  }
+  .transition.is-active .transition-text{ opacity:1; }
+  @media (prefers-reduced-motion:reduce){ .transition-text{ transition:none; } }
+
+  /* ---------- Play ---------- */
+  .play{ background:#1E9FD6; }
+  .play .section-head .lead{ color:#FFFFFF; }
+  .game-frame{
+    scroll-margin-top:10px;
+    max-width:480px;
+    margin:0 auto;
+    border-radius:24px;
+    overflow:hidden;
+    box-shadow:0 24px 48px -24px rgba(0,30,60,.5);
+  }
+  .game-frame iframe{
+    display:block;
+    width:100%;
+    height:800px;
+    border:none;
+    transition:height .2s ease;
+  }
+
+  /* ---------- Home time ---------- */
+  .hometime{ background:var(--paper); }
+
+  /* ---------- Closing CTA ---------- */
+  .cta-close{ background:var(--yellow); }
+  .cta-close .eyebrow{ color:var(--ink); }
+  .cta-buttons{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:14px;
+    max-width:360px;
+    margin:0 auto;
+  }
+  .cta-btn-main{
+    width:100%;
+    text-align:center;
+    text-decoration:none;
+    background:var(--ink);
+    color:#FFFFFF;
+    font-weight:700;
+    font-size:16px;
+    padding:15px 20px;
+    border-radius:999px;
+  }
+  .cta-btn-sub{
+    width:100%;
+    text-align:center;
+    text-decoration:none;
+    background:#FFFFFF;
+    color:var(--ink);
+    font-weight:700;
+    font-size:14.5px;
+    padding:13px 20px;
+    border-radius:999px;
+    border:2px solid var(--ink);
+  }
+
+  .banner-strip{ padding:0; }
+  .banner-strip img{ width:100%; height:auto; }
+
+  @media (max-width:600px){
+    section{ padding:48px 16px; }
+    .product-group{ margin-bottom:36px; }
+    .product-grid{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="site-header">
+  <a href="https://www.rakuten.co.jp/babuuu/" target="_blank" rel="noopener">
+    <img src="babuuu-logo.png" alt="babuuu.">
+  </a>
+</header>
+
+<section class="fv">
+  <img class="fv-photo" src="fv-hero.jpg" alt="お出かけ日和も、おうち日和も。秋は、晴れの日もあれば雨の日もある。どちらの日も、お子さんとの時間がもっと楽しくなるように。">
+  <div class="fv-actions">
+    <a class="fv-scroll" href="#shopping">アイテムを見る
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 4v16M5 13l7 7 7-7"/></svg>
+    </a>
+    <a class="fv-scroll is-play" href="#game">お子さまと一緒にゲームをしてみる？
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 4v16M5 13l7 7 7-7"/></svg>
+    </a>
+  </div>
+</section>
+
+<section class="outing" id="shopping">
+  <div class="section-head">
+    <p class="outing-kicker">口コミも参考にして<br class="mobile-break">ピッタリを探そう！</p>
+  </div>
+
+  <div class="product-group">
+    <div class="section-head">
+      <p class="eyebrow">BATH & TOILET TRAINING</p>
+      <h2 class="title-lg">お風呂大好き！<br>トイレトレーニングも<br>楽しく！</h2>
+      <p class="lead">毎日のバスタイムとトイレトレーニングを、もっと楽しく快適に。人気アイテムをセレクトしました。</p>
+    </div>
+    <div class="product-grid">
+      <div class="product-card reveal">
+        <a class="product-link" href="https://item.rakuten.co.jp/babuuu/bgoods-00107/" target="_blank" rel="noopener">
+          <div class="product-photo"><img src="https://shop.r10s.jp/babuuu/cabinet/0917kd/default/s1/4973655200308_s1.jpg" alt="リッチェル ひんやりしないおふろマットN" loading="lazy"></div>
+          <div class="product-body">
+            <p class="product-name">リッチェル ひんやりしないおふろマットN</p>
+            <p class="product-desc">ひんやりしない特殊素材のマットで、お風呂の待ち時間もぽかぽか。汚れてもさっと拭けてお手入れもラクラク。</p>
+            <ul class="product-tags"><li>冷たくない</li><li>お手入れ簡単</li><li>待ち時間も快適</li></ul>
+          </div>
+        </a>
+        <div class="product-meta">
+          <span class="product-price"><span class="num">4,400</span>円</span>
+          <div class="product-actions">
+            <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00107/" target="_blank" rel="noopener">商品詳細へ</a>
+            <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10000579/1.1/" target="_blank" rel="noopener">口コミ<span class="num">258</span>件を<span class="check">check！</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="product-card reveal">
+        <a class="product-link" href="https://item.rakuten.co.jp/babuuu/bgoods-00020/" target="_blank" rel="noopener">
+          <div class="product-photo"><img src="https://shop.r10s.jp/babuuu/cabinet/0917kd/default/s1/4969220915937_s1.jpg" alt="アップリカ はじめてのお風呂から使えるバスチェア" loading="lazy"></div>
+          <div class="product-body">
+            <p class="product-name">アップリカ はじめてのお風呂から使えるバスチェア</p>
+            <p class="product-desc">首がすわる前の新生児期から2歳頃まで、寝かせた姿勢でも座らせた姿勢でも使える2WAY設計。ひとりでもお風呂に入れやすい。</p>
+            <ul class="product-tags"><li>新生児から2歳まで</li><li>寝かせて洗える</li><li>ひとりでも入れやすい</li></ul>
+          </div>
+        </a>
+        <div class="product-meta">
+          <span class="product-price"><span class="num">3,979</span>円</span>
+          <div class="product-actions">
+            <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00020/" target="_blank" rel="noopener">商品詳細へ</a>
+            <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10000037/1.1/" target="_blank" rel="noopener">口コミ<span class="num">58</span>件を<span class="check">check！</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="product-card reveal">
+        <a class="product-link" href="https://item.rakuten.co.jp/babuuu/bgoods-00108/" target="_blank" rel="noopener">
+          <div class="product-photo"><img src="https://shop.r10s.jp/babuuu/cabinet/0917kd/default/s1/4973655200407_s1.jpg" alt="リッチェル ひんやりしないおふろチェアN" loading="lazy"></div>
+          <div class="product-body">
+            <p class="product-name">リッチェル ひんやりしないおふろチェアN</p>
+            <p class="product-desc">おすわりが安定してきた子向けのバスチェア。座面がひんやりしないから、洗い待ちの時間も嫌がらずに座っていられる。</p>
+            <ul class="product-tags"><li>ひんやりしない</li><li>おすわり期から</li><li>洗い待ちに便利</li></ul>
+          </div>
+        </a>
+        <div class="product-meta">
+          <span class="product-price"><span class="num">4,980</span>円</span>
+          <div class="product-actions">
+            <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00108/" target="_blank" rel="noopener">商品詳細へ</a>
+            <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10000580/1.1/" target="_blank" rel="noopener">口コミ<span class="num">50</span>件を<span class="check">check！</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="product-card reveal">
+        <a class="product-link" href="https://item.rakuten.co.jp/babuuu/bgoods-00112/" target="_blank" rel="noopener">
+          <div class="product-photo"><img src="https://shop.r10s.jp/babuuu/cabinet/0917kd/default/s1/4973655460207_s1.jpg" alt="リッチェル バスチェア マット付R" loading="lazy"></div>
+          <div class="product-body">
+            <p class="product-name">リッチェル バスチェア マット付R</p>
+            <p class="product-desc">マットとチェアが1台2役。首すわり前は寝かせて、おすわりできるようになったら座らせてと、成長に合わせて使い方を変えられる。</p>
+            <ul class="product-tags"><li>マット付き</li><li>首すわり前から</li><li>1台2役</li></ul>
+          </div>
+        </a>
+        <div class="product-meta">
+          <span class="product-price"><span class="num">5,950</span>円</span>
+          <div class="product-actions">
+            <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00112/" target="_blank" rel="noopener">商品詳細へ</a>
+            <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10000585/1.1/" target="_blank" rel="noopener">口コミ<span class="num">4</span>件を<span class="check">check！</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="product-card reveal">
+        <a class="product-link" href="https://item.rakuten.co.jp/babuuu/bgoods-00118/" target="_blank" rel="noopener">
+          <div class="product-photo"><img src="https://shop.r10s.jp/babuuu/cabinet/0917kd/default/s1/4945680203913_s1.jpg" alt="リッチェル ふかふかベビーバスK" loading="lazy"></div>
+          <div class="product-body">
+            <p class="product-name">リッチェル ふかふかベビーバスK</p>
+            <p class="product-desc">空気を含んだふかふかクッションが新生児のからだをやさしく支える沐浴ベビーバス。使わないときは折りたたんでコンパクトに収納できる。</p>
+            <ul class="product-tags"><li>新生児の沐浴</li><li>コンパクト折りたたみ</li><li>やわらかクッション</li></ul>
+          </div>
+        </a>
+        <div class="product-meta">
+          <span class="product-price"><span class="num">3,630</span>円</span>
+          <div class="product-actions">
+            <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00118/" target="_blank" rel="noopener">商品詳細へ</a>
+            <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10000584/1.1/" target="_blank" rel="noopener">口コミ<span class="num">3</span>件を<span class="check">check！</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="product-card reveal">
+        <a class="product-link" href="https://item.rakuten.co.jp/babuuu/bgoods-00140/" target="_blank" rel="noopener">
+          <div class="product-photo"><img src="https://shop.r10s.jp/babuuu/cabinet/0917kd/default/s1/4571369270152_s1.jpg" alt="スイマーバ タミリング キャンディベア" loading="lazy"></div>
+          <div class="product-body">
+            <p class="product-name">スイマーバ タミリング キャンディベア</p>
+            <p class="product-desc">腕にはめるだけの浮き輪で、両手が自由に動くからお風呂遊びがもっと楽しく。キャンディベアのデザインもかわいい。</p>
+            <ul class="product-tags"><li>腕につけるうきわ</li><li>お風呂遊び用</li><li>両手が自由に</li></ul>
+          </div>
+        </a>
+        <div class="product-meta">
+          <span class="product-price"><span class="num">2,970</span>円</span>
+          <div class="product-actions">
+            <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00140/" target="_blank" rel="noopener">商品詳細へ</a>
+            <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10000638/1.1/" target="_blank" rel="noopener">口コミ<span class="num">72</span>件を<span class="check">check！</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="product-card reveal">
+        <a class="product-link" href="https://item.rakuten.co.jp/babuuu/swimava-001/" target="_blank" rel="noopener">
+          <div class="product-photo"><img src="https://shop.r10s.jp/babuuu/cabinet/0917kd/default/s1/swimava_nr_s1.jpg" alt="スイマーバ うきわ首リング" loading="lazy"></div>
+          <div class="product-body">
+            <p class="product-name">スイマーバ うきわ首リング</p>
+            <p class="product-desc">スイマーバの定番アイテム。首につけて湯船に浮かべるだけで、赤ちゃんが水に慣れる「プカプカ体験」デビューにぴったり。出産祝いにも人気。</p>
+            <ul class="product-tags"><li>定番のうきわ</li><li>プカプカ体験</li><li>ギフトにも</li></ul>
+          </div>
+        </a>
+        <div class="product-meta">
+          <span class="product-price"><span class="num">3,520</span>円</span>
+          <div class="product-actions">
+            <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/swimava-001/" target="_blank" rel="noopener">商品詳細へ</a>
+            <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10000130/1.1/" target="_blank" rel="noopener">口コミ<span class="num">45</span>件を<span class="check">check！</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="product-card reveal">
+        <a class="product-link" href="https://item.rakuten.co.jp/babuuu/bgoods-00400/" target="_blank" rel="noopener">
+          <div class="product-photo"><img src="https://shop.r10s.jp/babuuu/cabinet/0917kd/default/s1/bgoods-00400_s1.jpg" alt="リッチェル トイサポ 補助便座" loading="lazy"></div>
+          <div class="product-body">
+            <p class="product-name">リッチェル トイサポ 補助便座</p>
+            <p class="product-desc">踏み台とグリップが一体になった補助便座。足がしっかり床につくので、トイレトレーニングの第一歩も安心してスタートできる。</p>
+            <ul class="product-tags"><li>踏み台付き</li><li>1歳6ヶ月〜4歳頃</li><li>グリップ付き</li></ul>
+          </div>
+        </a>
+        <div class="product-meta">
+          <span class="product-price"><span class="num">3,750</span>円</span>
+          <div class="product-actions">
+            <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00400/" target="_blank" rel="noopener">商品詳細へ</a>
+            <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10001045/1.1/" target="_blank" rel="noopener">口コミ<span class="num">50</span>件を<span class="check">check！</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-group">
+    <div class="group-photo reveal">
+      <img src="gate-lifestyle.jpg?v=2" alt="木製のベビーゲートで囲まれたリビングで、テレビを見る親子と犬" loading="lazy">
+    </div>
+    <div class="section-head">
+      <p class="eyebrow">BABY GATE</p>
+      <h2>お家で安心して遊べる<br>ベビーゲート</h2>
+      <p class="lead">階段やキッチンの前に置くだけで、おうちの中を安心して遊べる空間に。</p>
+    </div>
+    <div class="product-grid">
+      <div class="product-card reveal">
+        <a class="product-link" href="https://item.rakuten.co.jp/babuuu/bgoods-00327/" target="_blank" rel="noopener">
+          <div class="product-photo"><img src="https://shop.r10s.jp/babuuu/cabinet/0917kd/default/s1/4930969630047_s1.jpg" alt="カトージ 木製ベビーサークル" loading="lazy"></div>
+          <div class="product-body">
+            <p class="product-name">カトージ 木製ベビーサークル</p>
+            <p class="product-desc">パネルをつなげるだけで、四角形やコーナー型など好きな形に組み替えられる木製サークル。置くだけなので賃貸のお部屋でも使いやすい。</p>
+            <ul class="product-tags"><li>木製</li><li>好きな形に組み替え</li><li>置くだけ設置</li></ul>
+          </div>
+        </a>
+        <div class="product-meta">
+          <span class="product-price"><span class="num">6,490</span>円</span>
+          <div class="product-actions">
+            <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00327/" target="_blank" rel="noopener">商品詳細へ</a>
+            <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10000918/1.1/" target="_blank" rel="noopener">口コミ<span class="num">28</span>件を<span class="check">check！</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="product-card reveal">
+        <a class="product-link" href="https://item.rakuten.co.jp/babuuu/bgoods-00125/" target="_blank" rel="noopener">
+          <div class="product-photo"><img src="https://shop.r10s.jp/babuuu/cabinet/0917kd/default/s1/bgoods-00125_s1.jpg" alt="リッチェル ベビーサークル パーテーション" loading="lazy"></div>
+          <div class="product-body">
+            <p class="product-name">リッチェル ベビーサークル(パーテーション)</p>
+            <p class="product-desc">扉付きだから出入りがラクラク。テレビ前や階段前のパーテーションとしても使えて、置き方をアレンジしやすい。</p>
+            <ul class="product-tags"><li>扉付き</li><li>置くだけ設置</li><li>アレンジ自在</li></ul>
+          </div>
+        </a>
+        <div class="product-meta">
+          <span class="product-price"><span class="num">4,580</span>円</span>
+          <div class="product-actions">
+            <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00125/" target="_blank" rel="noopener">商品詳細へ</a>
+            <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10000597/1.1/" target="_blank" rel="noopener">口コミ<span class="num">1</span>件を<span class="check">check！</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="product-card reveal">
+        <a class="product-link" href="https://item.rakuten.co.jp/babuuu/bgoods-00368/" target="_blank" rel="noopener">
+          <div class="product-photo"><img src="https://shop.r10s.jp/babuuu/cabinet/0917kd/default/s1/4930969635172_s1.jpg" alt="カトージ 木製ベビーフェンス ナチュラル" loading="lazy"></div>
+          <div class="product-body">
+            <p class="product-name">カトージ 木製ベビーフェンス ナチュラル</p>
+            <p class="product-desc">パネルの数や向きを自由に組み換えられる木製フェンス。脚部が広めの安定設計で、赤ちゃんが寄りかかっても倒れにくい。</p>
+            <ul class="product-tags"><li>木製</li><li>組み換え自由</li><li>倒れにくい安定設計</li></ul>
+          </div>
+        </a>
+        <div class="product-meta">
+          <span class="product-price"><span class="num">12,100</span>円</span>
+          <div class="product-actions">
+            <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00368/" target="_blank" rel="noopener">商品詳細へ</a>
+            <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10000995/1.1/" target="_blank" rel="noopener">口コミ<span class="num">1</span>件を<span class="check">check！</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="transition" id="transition">
+  <div class="transition-sky">
+    <svg viewBox="0 0 1200 420" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="trSky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#5A9BCB"/>
+          <stop offset="100%" stop-color="#F3E6D2"/>
+        </linearGradient>
+        <linearGradient id="trRain" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#3E5F87"/>
+          <stop offset="100%" stop-color="#33507A"/>
+        </linearGradient>
+      </defs>
+      <rect width="1200" height="420" fill="url(#trSky)"/>
+      <g class="sunny-layer">
+        <circle cx="620" cy="130" r="46" fill="#FFF3D6"/>
+        <g fill="#FFFFFF" opacity="0.7">
+          <ellipse cx="220" cy="120" rx="90" ry="30"/>
+          <ellipse cx="300" cy="105" rx="55" ry="22"/>
+        </g>
+      </g>
+      <g class="rain-layer">
+        <rect width="1200" height="420" fill="url(#trRain)"/>
+        <g fill="#4A6C93">
+          <ellipse cx="200" cy="90" rx="130" ry="42"/>
+          <ellipse cx="600" cy="70" rx="160" ry="46"/>
+          <ellipse cx="980" cy="100" rx="140" ry="40"/>
+        </g>
+        <g class="raindrops">
+          <line class="raindrop" x1="120" y1="140" x2="112" y2="176" style="animation-delay:-.1s"/>
+          <line class="raindrop" x1="260" y1="120" x2="252" y2="156" style="animation-delay:-.5s"/>
+          <line class="raindrop" x1="400" y1="160" x2="392" y2="196" style="animation-delay:-.8s"/>
+          <line class="raindrop" x1="540" y1="130" x2="532" y2="166" style="animation-delay:-.2s"/>
+          <line class="raindrop" x1="680" y1="170" x2="672" y2="206" style="animation-delay:-.6s"/>
+          <line class="raindrop" x1="820" y1="140" x2="812" y2="176" style="animation-delay:-.9s"/>
+          <line class="raindrop" x1="960" y1="160" x2="952" y2="196" style="animation-delay:-.3s"/>
+          <line class="raindrop" x1="1080" y1="130" x2="1072" y2="166" style="animation-delay:-.7s"/>
+          <line class="raindrop" x1="60" y1="190" x2="52" y2="226" style="animation-delay:-1s"/>
+          <line class="raindrop" x1="1150" y1="190" x2="1142" y2="226" style="animation-delay:-.4s"/>
+        </g>
+      </g>
+      <g transform="translate(560,290)">
+        <rect x="-46" y="-58" width="92" height="116" rx="10" fill="#C68A46"/>
+        <rect x="-38" y="-50" width="76" height="100" rx="4" fill="#DCE9F2"/>
+        <rect x="-2.5" y="-50" width="5" height="100" fill="#C68A46"/>
+        <rect x="-38" y="-2.5" width="76" height="5" fill="#C68A46"/>
+        <g class="rain-layer" opacity="0.55">
+          <rect x="-38" y="-50" width="76" height="100" fill="#B7C2D9"/>
+        </g>
+      </g>
+      <path d="M0 360 C 200 330, 380 380, 600 350 C 820 322, 1000 370, 1200 340 L1200 420 L0 420 Z" fill="#F3E6D2"/>
+    </svg>
+  </div>
+  <div class="transition-text">
+    <p class="eyebrow">PLAY / おうち遊び編</p>
+    <h2>雨の日は、おうちでちょっと遊ぼう。</h2>
+  </div>
+</section>
+
+<section class="play" id="play">
+  <div class="section-head">
+    <p class="lead">まどを なぞって、かくれている ものを あててみよう。5回目にはプレゼント！</p>
+  </div>
+  <div class="game-frame" id="game">
+    <iframe src="game.html" title="まどそうじゲーム" loading="lazy"></iframe>
+  </div>
+</section>
+
+<section class="hometime" id="hometime">
+  <div class="section-head">
+    <p class="eyebrow">HOME TIME / おうち時間</p>
+    <h2 class="title-lg">ベビーチェア＆キッズチェア<br>どれがいいか<br>迷っちゃう・・・</h2>
+    <p class="lead">木製、大人まで使える、軽量、テーブル付き。特徴で選べる4タイプをご紹介します。</p>
+  </div>
+
+  <div class="product-group">
+    <p class="group-label">木製であたたかみのある1台</p>
+    <div class="product-grid">
+      <div class="product-card reveal">
+        <a class="product-link" href="https://item.rakuten.co.jp/babuuu/bgoods-00461/" target="_blank" rel="noopener">
+          <div class="product-photo"><img src="https://shop.r10s.jp/babuuu/cabinet/0917kd/default/s1/4930969225236_s1.jpg" alt="カトージ 木製ハイチェア スワルン" loading="lazy"></div>
+          <div class="product-body">
+            <p class="product-name">カトージ 木製ハイチェア スワルン</p>
+            <p class="product-desc">テーブルが身体にフィットして立ち上がりにくい設計。クッション付きの座面で、木製のあたたかみとやわらかな座り心地を両立。</p>
+            <ul class="product-tags"><li>木製</li><li>立ち上がり防止</li><li>クッション付き</li></ul>
+          </div>
+        </a>
+        <div class="product-meta">
+          <span class="product-price"><span class="num">7,970</span>円</span>
+          <div class="product-actions">
+            <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00461/" target="_blank" rel="noopener">商品詳細へ</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-group">
+    <p class="group-label">組み替えて大きくなっても使える</p>
+    <div class="product-grid">
+      <div class="product-card reveal">
+        <a class="product-link" href="https://item.rakuten.co.jp/babuuu/bgoods-00425/" target="_blank" rel="noopener">
+          <div class="product-photo"><img src="https://shop.r10s.jp/babuuu/cabinet/0917kd/default/s1/4930969176033_s1.jpg" alt="カトージ 2WAYステップ&チェア ノボルン" loading="lazy"></div>
+          <div class="product-body">
+            <p class="product-name">カトージ 2WAYステップ&チェア ノボルン</p>
+            <p class="product-desc">ステップ台としてもチェアとしても組み替えて使える2WAY設計。成長に合わせて形を変えながら、耐荷重80kgの大人になっても長く活躍する。</p>
+            <ul class="product-tags"><li>組み替え可能</li><li>耐荷重80kg</li><li>2WAY設計</li></ul>
+          </div>
+        </a>
+        <div class="product-meta">
+          <span class="product-price"><span class="num">4,378</span>円</span>
+          <div class="product-actions">
+            <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00425/" target="_blank" rel="noopener">商品詳細へ</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-group">
+    <p class="group-label">軽量で折りたためる</p>
+    <div class="product-grid">
+      <div class="product-card reveal">
+        <a class="product-link" href="https://item.rakuten.co.jp/babuuu/bgoods-00321/" target="_blank" rel="noopener">
+          <div class="product-photo"><img src="https://shop.r10s.jp/babuuu/cabinet/0917kd/default/s1/4930969195065_s1.jpg" alt="カトージ 折りたたみパイプイス" loading="lazy"></div>
+          <div class="product-body">
+            <p class="product-name">カトージ 折りたたみパイプイス</p>
+            <p class="product-desc">本体重量わずか1.5kgと軽量で、片手でもラクラク持ち運べる。使わないときはさっと折りたたんで、隙間にコンパクトに収納できる。</p>
+            <ul class="product-tags"><li>軽量1.5kg</li><li>折りたたみ可能</li><li>持ち運びラク</li></ul>
+          </div>
+        </a>
+        <div class="product-meta">
+          <span class="product-price"><span class="num">1,540</span>円</span>
+          <div class="product-actions">
+            <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00321/" target="_blank" rel="noopener">商品詳細へ</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-group">
+    <p class="group-label">テーブル付き・高さ調整できる</p>
+    <div class="product-grid">
+      <div class="product-card reveal">
+        <a class="product-link" href="https://item.rakuten.co.jp/babuuu/bgoods-00127/" target="_blank" rel="noopener">
+          <div class="product-photo"><img src="https://shop.r10s.jp/babuuu/cabinet/kd0000/default/s1/4945680207348_s1.jpg" alt="リッチェル 2WAYごきげんチェア" loading="lazy"></div>
+          <div class="product-body">
+            <p class="product-name">リッチェル 2WAYごきげんチェア</p>
+            <p class="product-desc">座面の高さを2段階で調節できるから、ローチェアからテーブルチェアへと成長に合わせて使い分けられる。取り外せるテーブル付きで食事の練習にも便利。</p>
+            <ul class="product-tags"><li>2段階高さ調整</li><li>テーブル付き</li><li>食事の練習に</li></ul>
+          </div>
+        </a>
+        <div class="product-meta">
+          <span class="product-price"><span class="num">6,930</span>円</span>
+          <div class="product-actions">
+            <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00127/" target="_blank" rel="noopener">商品詳細へ</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-close">
+  <div class="section-head">
+    <p class="eyebrow">LET'S GO / おでかけ準備</p>
+    <h2>さあ、次のお出かけの準備をしよう。</h2>
+    <p class="lead">クーポンをゲットしたら、紹介したアイテムをチェック。秋のおでかけを、もっと快適に。</p>
+  </div>
+  <div class="cta-buttons">
+    <a class="cta-btn-main" href="#shopping">紹介したアイテムを見る</a>
+    <a class="cta-btn-sub" href="https://search.rakuten.co.jp/search/mall/%E3%81%8A%E9%A2%A8%E5%91%82/?sid=422856" target="_blank" rel="noopener">お風呂・トイトレ用品を見る</a>
+    <a class="cta-btn-sub" href="https://search.rakuten.co.jp/search/mall/%E3%83%99%E3%83%93%E3%83%BC%E3%82%B2%E3%83%BC%E3%83%88/?sid=422856" target="_blank" rel="noopener">ベビーゲート一覧を見る</a>
+    <a class="cta-btn-sub" href="https://search.rakuten.co.jp/search/mall/%E6%A4%85%E5%AD%90/?sid=422856" target="_blank" rel="noopener">ベビーチェア一覧を見る</a>
+  </div>
+</section>
+
+<section class="banner-strip">
+  <a href="https://www.rakuten.ne.jp/gold/babuuu/c/babykids/nyuen/" target="_blank" rel="noopener">
+    <img src="https://tshop.r10s.jp/babuuu/cabinet/sitedesign/index/top_slide/nyuensp_210.jpg" alt="そろそろ考えようかな？入園入学準備" loading="lazy">
+  </a>
+</section>
+
+</div>
+<script>
+(function(){
+  var el = document.getElementById('transition');
+  if(!el) return;
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    el.classList.add('is-active');
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting) el.classList.add('is-active');
+    });
+  }, { threshold:0.4 });
+  io.observe(el);
+})();
+
+(function(){
+  var frame = document.querySelector('.game-frame iframe');
+  if(!frame) return;
+  window.addEventListener('message', function(e){
+    if(e.source !== frame.contentWindow) return;
+    if(e.data && e.data.type === 'madoGameHeight' && typeof e.data.height === 'number'){
+      frame.style.height = Math.max(600, e.data.height) + 'px';
+    }
+  });
+})();
+
+(function(){
+  var items = document.querySelectorAll('.reveal');
+  if(!items.length) return;
+  if(!('IntersectionObserver' in window) || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)){
+    items.forEach(function(el){ el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold:0.15, rootMargin:'0px 0px -8% 0px' });
+  items.forEach(function(el){ io.observe(el); });
+})();
+
+(function(){
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(ev){
+      var t = document.querySelector(a.getAttribute('href'));
+      if(!t) return;
+      ev.preventDefault();
+      t.scrollIntoView({ behavior:'smooth', block:'start' });
+      var last = -1, still = 0, polls = 0;
+      var iv = setInterval(function(){
+        polls++;
+        var y = window.scrollY;
+        still = (Math.abs(y - last) < 1) ? still + 1 : 0;
+        last = y;
+        if(still >= 2 || polls > 40){
+          clearInterval(iv);
+          var margin = parseFloat(getComputedStyle(t).scrollMarginTop) || 0;
+          if(Math.abs(t.getBoundingClientRect().top - margin) > 2){
+            t.scrollIntoView({ behavior:'instant', block:'start' });
+          }
+        }
+      }, 120);
+    });
+  });
+})();
+</script>
+</body>
+</html>

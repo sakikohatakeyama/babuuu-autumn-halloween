@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ギフトさがし｜babuuu</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700;900&family=Jost:wght@500;600&display=swap');
+
+  :root{
+    --bg:#FBF1E8;
+    --ink:#4A3B34;
+    --rose:#E8A9A0;
+    --rose-deep:#D9776B;
+    --sage:#9FB495;
+    --gold:#C9A15A;
+    --gold-light:#F0D48A;
+    --card-bg:#FFFFFF;
+    --cream:#FFF8F0;
+  }
+
+  *{box-sizing:border-box;}
+  [hidden]{display:none !important;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+    padding:26px 20px 34px;
+    display:flex;
+    justify-content:center;
+  }
+  .page{
+    width:100%;
+    max-width:440px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:14px;
+  }
+
+  .intro{
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  h1{
+    margin:0;
+    font-family:'Zen Maru Gothic', 'Noto Sans JP', sans-serif;
+    font-weight:900;
+    font-size:clamp(26px,7.5vw,34px);
+    text-wrap:balance;
+    color:var(--ink);
+  }
+  .lead{
+    margin:0;
+    font-size:16px;
+    font-weight:500;
+    line-height:1.8;
+    color:var(--ink);
+    max-width:30ch;
+    margin-inline:auto;
+    opacity:.85;
+  }
+
+  .hud{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .hud-badge{
+    display:flex; align-items:baseline; gap:5px;
+    background:var(--card-bg);
+    border:2px solid var(--rose);
+    border-radius:999px;
+    padding:7px 16px;
+    box-shadow:0 6px 14px -10px rgba(74,59,52,.3);
+  }
+  .hud-badge .label{ font-size:12px; font-weight:700; color:var(--rose-deep); }
+  .hud-badge .value{ font-family:'Jost',sans-serif; font-weight:600; font-size:19px; color:var(--ink); }
+  .hud-badge.time{ border-color:var(--sage); }
+  .hud-badge.time .label{ color:var(--sage); }
+
+  .holes{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:12px;
+    width:min(300px, 86vw);
+  }
+  .hole{
+    position:relative;
+    aspect-ratio:1/1;
+    border-radius:18px;
+    background:linear-gradient(180deg, #F3E3D8, #E9D2C2);
+    overflow:hidden;
+    border:none;
+    cursor:pointer;
+    padding:0;
+  }
+  .hole::before{
+    content:'';
+    position:absolute; left:14%; right:14%; bottom:8px; height:13%;
+    background:rgba(74,59,52,.16);
+    border-radius:50%;
+    filter:blur(1.5px);
+  }
+  .box-wrap{
+    position:absolute; left:50%; bottom:-100%; width:60%; aspect-ratio:1/1;
+    transform:translateX(-50%);
+    transition:bottom .22s cubic-bezier(.25,.8,.3,1.25);
+  }
+  .hole.active .box-wrap{ bottom:16%; }
+  .box-wrap svg{ width:100%; height:100%; display:block; }
+  .hole.rare .box-ribbon{ fill:var(--rose-deep); }
+  .hole.rare .box-body{ fill:var(--gold-light); }
+  .hole.rare .box-lid{ fill:var(--gold); }
+  .sparkle{ opacity:0; }
+  .hole.rare .sparkle{ opacity:1; }
+
+  .point-pop{
+    position:absolute; left:50%; top:26%;
+    transform:translate(-50%,-40%) scale(.6);
+    font-weight:900; font-family:'Jost',sans-serif; font-size:22px; color:var(--rose-deep);
+    opacity:0; pointer-events:none; z-index:5;
+    transition:opacity .35s ease, transform .35s ease;
+  }
+  .point-pop.show{ opacity:1; transform:translate(-50%,-120%) scale(1); }
+  .hole.rare .point-pop{ color:var(--gold); }
+
+  .start-btn, .next-btn{
+    font-weight:700; font-size:17px;
+    color:#FFFFFF; background:var(--rose-deep); border:none;
+    padding:14px 34px; border-radius:999px; cursor:pointer;
+    box-shadow:0 10px 18px -10px rgba(217,119,107,.6);
+  }
+  .start-btn:focus-visible, .cta-btn:focus-visible, .reset-btn:focus-visible, .hole:focus-visible{
+    outline:3px solid var(--gold); outline-offset:2px;
+  }
+
+  .feedback{ min-height:22px; margin:0; font-size:15px; font-weight:700; color:var(--rose-deep); }
+
+  .stage-wrap{ display:flex; flex-direction:column; align-items:center; }
+  .stage{
+    position:relative;
+    width:min(240px, 60vw);
+    aspect-ratio:4/5;
+    border-radius:24px;
+    overflow:hidden;
+    background:var(--cream);
+    box-shadow:0 14px 30px -14px rgba(74,59,52,.4);
+  }
+  .scene{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+
+  .petals{ position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:6; }
+  .petal{
+    position:absolute; top:-14px; width:9px; height:9px;
+    border-radius:2px 8px; opacity:.95; animation:fall linear forwards;
+  }
+  @keyframes fall{ to{ transform:translateY(360px) rotate(300deg); opacity:.2; } }
+  @media (prefers-reduced-motion: reduce){ .petal{animation:none; opacity:0;} }
+
+  .reveal-wait{ width:min(320px, 82vw); text-align:center; }
+  .reveal-wait p{ margin:0; font-size:16px; font-weight:700; color:var(--rose-deep); animation:pulse 1.8s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce){ .reveal-wait p{animation:none;} }
+  @keyframes pulse{ 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.05); } }
+
+  .result{
+    width:min(360px, 86vw);
+    background:var(--card-bg);
+    border-radius:20px;
+    padding:26px;
+    text-align:center;
+    box-shadow:0 16px 34px -18px rgba(74,59,52,.32);
+    display:flex; flex-direction:column; gap:12px; align-items:center;
+  }
+  .result-title{ margin:0; font-weight:900; font-size:26px; color:var(--ink); }
+  .result-coupon{ margin:0; font-size:15px; color:var(--ink); display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:6px; }
+  .coupon-badge{
+    display:inline-flex; align-items:baseline; gap:2px;
+    background:#FBE4DF; color:var(--rose-deep);
+    font-weight:700; font-size:15px;
+    padding:5px 14px; border-radius:999px;
+  }
+  .coupon-badge .num{ font-family:'Jost', sans-serif; font-weight:600; font-size:18px; }
+  .result-score{ margin:0; font-size:14px; color:var(--ink); opacity:.7; }
+  .result-body{ margin:0; font-size:15.5px; line-height:1.75; color:var(--ink); opacity:.85; }
+  .result-actions{ margin-top:4px; display:flex; flex-direction:column; gap:12px; width:100%; align-items:center; }
+  .cta-btn{
+    display:inline-block; width:100%; max-width:270px; text-align:center; text-decoration:none;
+    background:var(--sage); color:#FFFFFF; font-weight:700; font-size:16.5px;
+    padding:14px 18px; border-radius:999px;
+    box-shadow:0 10px 18px -10px rgba(159,180,149,.7);
+  }
+  .coupon-get-btn{
+    background:var(--rose-deep); color:#fff;
+    box-shadow:0 10px 18px -10px rgba(217,119,107,.6);
+  }
+  .reset-btn{
+    background:none; border:none; font-size:14px; font-weight:500;
+    color:var(--ink); text-decoration:underline; cursor:pointer; padding:4px;
+    opacity:.75;
+  }
+</style>
+</head>
+<body>
+
+<svg style="position:absolute;width:0;height:0" aria-hidden="true">
+  <defs>
+    <symbol id="ico-giftbox" viewBox="0 0 100 100">
+      <path d="M50 40 C 40 26 28 30 32 40 Z" class="box-lid" fill="#C9A15A"/>
+      <path d="M50 40 C 60 26 72 30 68 40 Z" class="box-lid" fill="#C9A15A"/>
+      <rect x="18" y="40" width="64" height="48" rx="6" class="box-body" fill="#E8A9A0"/>
+      <rect x="18" y="40" width="64" height="10" class="box-ribbon" fill="#D9776B"/>
+      <rect x="44" y="40" width="12" height="48" class="box-ribbon" fill="#D9776B"/>
+      <g class="sparkle" fill="#FFFFFF">
+        <path d="M22 30 L24 35 L29 37 L24 39 L22 44 L20 39 L15 37 L20 35 Z"/>
+        <path d="M80 50 L81.5 53.5 L85 55 L81.5 56.5 L80 60 L78.5 56.5 L75 55 L78.5 53.5 Z"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="page">
+  <div class="intro">
+    <h1>ギフトさがし</h1>
+    <p class="lead" id="leadText">出てきた ギフトボックスを タップしよう！<br>きらきら箱は 10ポイント♪</p>
+  </div>
+
+  <div class="hud" id="hud" hidden>
+    <div class="hud-badge">
+      <span class="label">ポイント</span><span class="value" id="scoreValue">0</span>
+    </div>
+    <div class="hud-badge time">
+      <span class="label">のこり</span><span class="value" id="timeValue">20</span>
+    </div>
+  </div>
+
+  <div class="holes" id="holes" hidden></div>
+
+  <p class="feedback" id="feedback" aria-live="polite"></p>
+
+  <button class="start-btn" id="startBtn" type="button">はじめる！</button>
+
+  <div class="stage-wrap" id="stageWrap" hidden>
+    <div class="stage" id="stage">
+      <svg class="scene" id="sceneSvg" viewBox="0 0 320 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
+      <div class="petals" id="petals" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <div class="reveal-wait" id="revealWait" hidden>
+    <p id="revealWaitText">けっかを たしかめてるよ…</p>
+  </div>
+
+  <div class="result" id="result" hidden>
+    <p class="result-title" id="resultTitle"></p>
+    <p class="result-score" id="resultScore"></p>
+    <p class="result-coupon" id="resultCoupon"></p>
+    <p class="result-body" id="resultBody">今日も げんきに あそぼうね！</p>
+    <div class="result-actions">
+      <a class="cta-btn coupon-get-btn" href="#" target="_blank" rel="noopener" id="couponGetBtn" hidden>クーポンを受け取る</a>
+      <a class="cta-btn" href="index.html#shopping" target="_top" id="ctaBtn">おでかけアイテムを見る</a>
+      <button class="reset-btn" id="resetBtn" type="button">もういちど あそぶ</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  // ==========================================================
+  // ▼▼▼ ゲーム難易度のしきい値（自由に調整してください） ▼▼▼
+  var GAME_SECONDS = 20;       // 制限時間（秒）
+  var RARE_CHANCE = 0.15;      // きらきら箱（10ポイント）が出る確率
+  var SPAWN_INTERVAL_MS = 800; // 箱が出現するだいたいの間隔
+  var BOX_VISIBLE_MS = 1000;   // 箱が出てから消えるまでの時間
+  var SCORE_THRESHOLDS = {
+    first:  15, // これ以上のポイントで1等（100円OFF）
+    second: 8,  // これ以上のポイントで2等（55円OFF）
+    third:  3   // これ以上のポイントで3等（39円OFF）
+    // それ未満は ざんねん賞（10円OFF）
+  };
+  // ▲▲▲ ここまで ▲▲▲
+  // ==========================================================
+
+  // ==========================================================
+  // ▼▼▼ クーポンのリンク設定（ここに4種類のURLを貼ってください） ▼▼▼
+  var COUPON_URLS = {
+    first:  '',  // 1等（100円OFF）のクーポン取得URL
+    second: '',  // 2等（55円OFF）のクーポン取得URL
+    third:  '',  // 3等（39円OFF）のクーポン取得URL
+    miss:   ''   // ざんねん賞（10円OFF）のクーポン取得URL
+  };
+  // ▲▲▲ ここまで ▲▲▲
+  // ==========================================================
+
+  var hud = document.getElementById('hud');
+  var scoreValue = document.getElementById('scoreValue');
+  var timeValue = document.getElementById('timeValue');
+  var holesWrap = document.getElementById('holes');
+  var feedback = document.getElementById('feedback');
+  var startBtn = document.getElementById('startBtn');
+  var stageWrap = document.getElementById('stageWrap');
+  var sceneSvg = document.getElementById('sceneSvg');
+  var petalsWrap = document.getElementById('petals');
+  var revealWait = document.getElementById('revealWait');
+  var revealWaitText = document.getElementById('revealWaitText');
+  var resultPanel = document.getElementById('result');
+  var resultTitle = document.getElementById('resultTitle');
+  var resultScore = document.getElementById('resultScore');
+  var resultCoupon = document.getElementById('resultCoupon');
+  var resultBody = document.getElementById('resultBody');
+  var couponGetBtn = document.getElementById('couponGetBtn');
+  var resetBtn = document.getElementById('resetBtn');
+  var petalColors = ['#E8A9A0', '#C9A15A', '#9FB495', '#FFFFFF'];
+
+  var COUPON_TIERS = {
+    first:  { key:'first',  label:'1等', amount:'100', accent:'#D9776B' },
+    second: { key:'second', label:'2等', amount:'55',  accent:'#C9A15A' },
+    third:  { key:'third',  label:'3等', amount:'39',  accent:'#9FB495' }
+  };
+  var MISS_TIER = { key:'miss', label:'ざんねん賞', amount:'10', accent:'#B7A99A' };
+
+  function spawnPetals(count){
+    petalsWrap.innerHTML = '';
+    for(var i = 0; i < count; i++){
+      var el = document.createElement('div');
+      el.className = 'petal';
+      el.style.left = (Math.random() * 92) + '%';
+      el.style.background = petalColors[i % petalColors.length];
+      el.style.animationDuration = (2.2 + Math.random() * 1.4) + 's';
+      el.style.animationDelay = (Math.random() * 0.5) + 's';
+      petalsWrap.appendChild(el);
+    }
+  }
+
+  function revealScene(tier){
+    var accent = tier.accent;
+    sceneSvg.innerHTML = ''
+      + '<rect width="320" height="400" fill="#FFF8F0"/>'
+      + '<g fill="' + accent + '" opacity="0.18">'
+      + '<circle cx="50" cy="70" r="8"/><circle cx="264" cy="56" r="6"/><circle cx="270" cy="320" r="7"/><circle cx="44" cy="336" r="6"/>'
+      + '</g>'
+      + '<g transform="translate(160,205)">'
+      + '<path d="M-78 -50 Q-84 -58 -76 -64 L76 -64 Q84 -58 78 -50 L78 50 Q84 58 76 64 L-76 64 Q-84 58 -78 50 Z" fill="#FFFFFF" stroke="' + accent + '" stroke-width="3"/>'
+      + '<circle cx="-78" cy="0" r="9" fill="#FFF8F0" stroke="' + accent + '" stroke-width="3"/>'
+      + '<circle cx="78" cy="0" r="9" fill="#FFF8F0" stroke="' + accent + '" stroke-width="3"/>'
+      + '<text y="14" text-anchor="middle" font-family="Jost, sans-serif" font-weight="600" font-size="46" fill="' + accent + '">' + tier.amount + '</text>'
+      + '</g>'
+      + '<text x="160" y="300" text-anchor="middle" font-family="Zen Maru Gothic, sans-serif" font-weight="900" font-size="22" fill="' + accent + '">' + tier.label + '</text>';
+  }
+
+  function tierFromScore(s){
+    if(s >= SCORE_THRESHOLDS.first) return COUPON_TIERS.first;
+    if(s >= SCORE_THRESHOLDS.second) return COUPON_TIERS.second;
+    if(s >= SCORE_THRESHOLDS.third) return COUPON_TIERS.third;
+    return MISS_TIER;
+  }
+
+  function showResult(tier, finalScore){
+    var isMiss = tier.key === 'miss';
+    resultTitle.textContent = tier.label + (isMiss ? '' : '！おめでとう！');
+    resultScore.textContent = finalScore + 'ポイント　あつめたよ！';
+    resultCoupon.innerHTML = '<span class="coupon-badge">GOGOクーポン <span class="num">' + tier.amount + '</span>円OFF</span> プレゼント♪';
+    resultBody.textContent = isMiss ? 'また あそびに きてね。つぎは 1等 ねらおう！' : 'すごい！たくさん あつめられたね！';
+    var couponUrl = COUPON_URLS[tier.key];
+    if(couponUrl){
+      couponGetBtn.href = couponUrl;
+      couponGetBtn.hidden = false;
+    } else {
+      couponGetBtn.hidden = true;
+    }
+    stageWrap.hidden = true;
+    resultPanel.hidden = false;
+    resultPanel.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  }
+
+  function runReveal(finalScore){
+    var tier = tierFromScore(finalScore);
+    var isMiss = tier.key === 'miss';
+    revealWaitText.textContent = isMiss ? 'ミニプレゼントを よういしてるよ…' : 'けっかを たしかめてるよ…';
+    revealWait.hidden = false;
+    setTimeout(function(){
+      revealWait.hidden = true;
+      stageWrap.hidden = false;
+      revealScene(tier);
+      spawnPetals(isMiss ? 8 : (tier.key === 'first' ? 22 : tier.key === 'second' ? 16 : 10));
+      setTimeout(function(){ showResult(tier, finalScore); }, 750);
+    }, 900);
+  }
+
+  var HOLE_COUNT = 9;
+  var holes = [];
+  var score = 0;
+  var timeLeft = GAME_SECONDS;
+  var gameRunning = false;
+  var spawnTimer = null;
+  var countdownTimer = null;
+
+  function buildHoles(){
+    holesWrap.innerHTML = '';
+    holes = [];
+    for(var i = 0; i < HOLE_COUNT; i++){
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'hole';
+      btn.setAttribute('aria-label', 'あな');
+      btn.innerHTML = ''
+        + '<div class="box-wrap"><svg viewBox="0 0 100 100"><use href="#ico-giftbox"/></svg></div>'
+        + '<div class="point-pop" id="pop' + i + '"></div>';
+      (function(idx){
+        btn.addEventListener('click', function(){ onHoleClick(idx); });
+      })(i);
+      holesWrap.appendChild(btn);
+      holes.push({ el:btn, active:false, rare:false, hit:false, hideTimeout:null, pop:btn.querySelector('.point-pop') });
+    }
+  }
+
+  function updateScoreUI(){ scoreValue.textContent = score; }
+  function updateTimeUI(){ timeValue.textContent = timeLeft; }
+
+  function randomEmptyHoleIndex(){
+    var candidates = [];
+    for(var i = 0; i < holes.length; i++){ if(!holes[i].active) candidates.push(i); }
+    if(!candidates.length) return null;
+    return candidates[Math.floor(Math.random() * candidates.length)];
+  }
+
+  function spawnBox(){
+    if(!gameRunning) return;
+    var idx = randomEmptyHoleIndex();
+    if(idx == null) return;
+    var hole = holes[idx];
+    var isRare = Math.random() < RARE_CHANCE;
+    hole.active = true;
+    hole.rare = isRare;
+    hole.hit = false;
+    hole.el.classList.add('active');
+    hole.el.classList.toggle('rare', isRare);
+    hole.hideTimeout = setTimeout(function(){ hideBox(idx); }, BOX_VISIBLE_MS);
+  }
+
+  function hideBox(idx){
+    var hole = holes[idx];
+    if(hole.hideTimeout){ clearTimeout(hole.hideTimeout); hole.hideTimeout = null; }
+    hole.active = false;
+    hole.el.classList.remove('active','rare');
+  }
+
+  function onHoleClick(idx){
+    if(!gameRunning) return;
+    var hole = holes[idx];
+    if(!hole.active || hole.hit) return;
+    hole.hit = true;
+    var points = hole.rare ? 10 : 1;
+    score += points;
+    updateScoreUI();
+    hole.pop.textContent = '+' + points;
+    hole.pop.classList.add('show');
+    setTimeout(function(){ hole.pop.classList.remove('show'); }, 500);
+    setTimeout(function(){ hideBox(idx); }, 200);
+  }
+
+  function startGame(){
+    score = 0;
+    timeLeft = GAME_SECONDS;
+    gameRunning = true;
+    feedback.textContent = '';
+    resultPanel.hidden = true;
+    stageWrap.hidden = true;
+    revealWait.hidden = true;
+    startBtn.hidden = true;
+    hud.hidden = false;
+    holesWrap.hidden = false;
+    buildHoles();
+    updateScoreUI();
+    updateTimeUI();
+    spawnTimer = setInterval(spawnBox, SPAWN_INTERVAL_MS);
+    countdownTimer = setInterval(function(){
+      timeLeft--;
+      updateTimeUI();
+      if(timeLeft <= 0) endGame();
+    }, 1000);
+  }
+
+  function endGame(){
+    gameRunning = false;
+    clearInterval(spawnTimer);
+    clearInterval(countdownTimer);
+    holes.forEach(function(h, i){ hideBox(i); });
+    hud.hidden = true;
+    holesWrap.hidden = true;
+    feedback.textContent = 'おわり！';
+    var finalScore = score;
+    setTimeout(function(){ runReveal(finalScore); }, 400);
+  }
+
+  startBtn.addEventListener('click', startGame);
+  resetBtn.addEventListener('click', function(){
+    startBtn.hidden = false;
+    resultPanel.hidden = true;
+  });
+
+  function postHeight(){
+    if(window.parent !== window){
+      window.parent.postMessage({ type:'madoGameHeight', height: document.body.scrollHeight }, '*');
+    }
+  }
+  window.addEventListener('load', postHeight);
+  window.addEventListener('resize', postHeight);
+  new MutationObserver(postHeight).observe(document.body, { childList:true, subtree:true, attributes:true });
+})();
+</script>
+</body>
+</html>
