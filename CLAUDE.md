@@ -8,7 +8,7 @@
 |---|---|
 | `index.html` | 秋のお出かけ×おうち時間LP（9〜10月前半用）。`game.html`をiframe埋め込み |
 | `game.html` | まどそうじゲーム（窓の曇りをなぞる→クイズ→クーポン抽選）。クーポンURL設定済み |
-| `index-halloween.html` | ハロウィンLP（オレンジ基調）。`game-halloween.html`をiframe埋め込み。**商品は仮カード（差し替え待ち）** |
+| `index-halloween.html` | ハロウィンLP（オレンジ基調）。`game-halloween.html`をiframe埋め込み。商品6点掲載済み |
 | `game-halloween.html` | 「まほうのかがみ」（game.htmlの鏡版、ハロウィンPNG使用）。**COUPON_URLSが空欄** |
 | `game-kigae.html` / `game-otoroi.html` / `game-gift.html` | 10月用に試作した別ゲーム案（きがえクイズ／神経衰弱／ギフトたたき）。未採用・参考 |
 | `hellowin-*.png` | ハロウィンのクイズ用イラスト7種（kabocha, obake, koumori, neko, majo, candy, kumo） |
@@ -16,7 +16,7 @@
 
 ## 未完了（次にやること）
 1. `game-halloween.html` 上部の `COUPON_URLS`（first/second/third）に10月分の楽天クーポン取得URLを貼る。空欄の間は「クーポンを受け取る」ボタンは出ない。
-2. `index-halloween.html` の仮商品（サンプル1〜5、「ここに見出しが はいります」）を実商品に差し替え。ハロウィン商品は無いため、見出しは「クーポンでおトクに買えるアイテム」の方針。
+2. ~~仮商品の差し替え~~ 済（2026-10-07）。構成「ハロウィンのごちそうは特等席で」＝ベビーチェア3点（bgoods-00127 / bgoods-00461 / bgoods-00187）、「おてつだいも ひとやすみも おうちで」＝goods-961（キッズステップ、在庫少）/ bgoods-00120 / bgoods-00035。方針：ハロウィン商品は無いので「おうちで過ごすハロウィン」に合うベビーチェア等を並べる。在庫切れ商品は避ける。
 3. 商品カードは `index.html` のものが完成形（商品詳細ボタン・口コミボタン・タグ3つ・説明2文）。同じ構造で作る。価格・口コミ数は公開前に実ページで再確認する（過去に価格変更あり）。
 4. 結果画面のクーポン額（1等100円/2等55円/3等39円）は `COUPON_TIERS` の `amount`。確率は `pickCouponOutcome()`（3%/60%/37%）。
 
