@@ -333,9 +333,10 @@
   .product-tags{ margin:0; padding:0; list-style:none; display:flex; flex-wrap:wrap; gap:4px 14px; }
   .product-tags li{ font-size:13px; font-weight:700; color:var(--purple); letter-spacing:.03em; }
   .product-tags li::before{ content:'#'; margin-right:2px; color:var(--orange-deep); }
+  /* 口コミ｜商品ページ｜お気に入り の3列固定。口コミが無い商品は左が空いて右に詰まる */
   .product-actions{
-    display:flex;
-    flex-wrap:wrap;
+    display:grid;
+    grid-template-columns:1fr 1.6fr 46px;
     gap:8px;
     align-items:center;
     padding:6px 0 0;
@@ -352,14 +353,15 @@
     text-decoration:none;
   }
   .product-reviews{
-    flex:1;
+    grid-column:1;
     color:var(--ink);
     background:var(--paper);
     border:2px solid var(--ink);
   }
   .product-reviews:hover{ background:var(--orange-soft); }
   .product-fav{
-    flex:0 0 46px !important;
+    grid-column:3;
+    justify-self:center;
     width:46px; height:46px;
     padding:0 !important;
     border-radius:50% !important;
@@ -372,7 +374,7 @@
   .product-fav:hover, .product-fav:focus-visible{ background:#E0457B; color:#FFFFFF; }
   .product-fav:hover svg path, .product-fav:focus-visible svg path{ fill:currentColor; }
   .product-detail{
-    flex:1.6;
+    grid-column:2;
     font-size:14px !important;
     color:#fff;
     background:var(--orange-deep);
@@ -572,9 +574,9 @@
           </div>
         </a>
         <div class="product-actions">
-          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10000592&amp;itype=1" target="_blank" rel="noopener" aria-label="お気に入りに追加" title="お気に入りに追加"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></a>
           <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10000592/1.1/" target="_blank" rel="noopener">口コミ<span class="num">37</span>件</a>
           <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00127/" target="_blank" rel="noopener">商品ページへ</a>
+          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10000592&amp;itype=1" target="_blank" rel="noopener" aria-label="お気に入りに追加" title="お気に入りに追加"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></a>
         </div>
       </div>
       <div class="product-card reveal">
@@ -588,9 +590,9 @@
           </div>
         </a>
         <div class="product-actions">
-          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10001140&amp;itype=1" target="_blank" rel="noopener" aria-label="お気に入りに追加" title="お気に入りに追加"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></a>
           <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10001140/1.1/" target="_blank" rel="noopener">口コミ<span class="num">3</span>件</a>
           <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00461/" target="_blank" rel="noopener">商品ページへ</a>
+          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10001140&amp;itype=1" target="_blank" rel="noopener" aria-label="お気に入りに追加" title="お気に入りに追加"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></a>
         </div>
       </div>
       <div class="product-card reveal">
@@ -604,9 +606,9 @@
           </div>
         </a>
         <div class="product-actions">
-          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10000649&amp;itype=1" target="_blank" rel="noopener" aria-label="お気に入りに追加" title="お気に入りに追加"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></a>
           <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10000649/1.1/" target="_blank" rel="noopener">口コミ<span class="num">85</span>件</a>
           <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00187/" target="_blank" rel="noopener">商品ページへ</a>
+          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10000649&amp;itype=1" target="_blank" rel="noopener" aria-label="お気に入りに追加" title="お気に入りに追加"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></a>
         </div>
       </div>
       <div class="product-card reveal">
@@ -620,9 +622,9 @@
           </div>
         </a>
         <div class="product-actions">
-          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10000936&amp;itype=1" target="_blank" rel="noopener" aria-label="お気に入りに追加" title="お気に入りに追加"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></a>
           <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10000936/1.1/" target="_blank" rel="noopener">口コミ<span class="num">7</span>件</a>
           <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00338/" target="_blank" rel="noopener">商品ページへ</a>
+          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10000936&amp;itype=1" target="_blank" rel="noopener" aria-label="お気に入りに追加" title="お気に入りに追加"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></a>
         </div>
       </div>
     </div>
@@ -705,8 +707,8 @@
           </div>
         </a>
         <div class="product-actions">
-          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10000122&amp;itype=1" target="_blank" rel="noopener" aria-label="お気に入りに追加" title="お気に入りに追加"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></a>
           <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/goods-961/" target="_blank" rel="noopener">商品ページへ</a>
+          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10000122&amp;itype=1" target="_blank" rel="noopener" aria-label="お気に入りに追加" title="お気に入りに追加"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></a>
         </div>
       </div>
       <div class="product-card reveal">
@@ -720,8 +722,8 @@
           </div>
         </a>
         <div class="product-actions">
-          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10001087&amp;itype=1" target="_blank" rel="noopener" aria-label="お気に入りに追加" title="お気に入りに追加"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></a>
           <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00425/" target="_blank" rel="noopener">商品ページへ</a>
+          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10001087&amp;itype=1" target="_blank" rel="noopener" aria-label="お気に入りに追加" title="お気に入りに追加"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></a>
         </div>
       </div>
       <div class="product-card reveal">
@@ -735,9 +737,9 @@
           </div>
         </a>
         <div class="product-actions">
-          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10000599&amp;itype=1" target="_blank" rel="noopener" aria-label="お気に入りに追加" title="お気に入りに追加"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></a>
           <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10000599/1.1/" target="_blank" rel="noopener">口コミ<span class="num">31</span>件</a>
           <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00120/" target="_blank" rel="noopener">商品ページへ</a>
+          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10000599&amp;itype=1" target="_blank" rel="noopener" aria-label="お気に入りに追加" title="お気に入りに追加"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></a>
         </div>
       </div>
       <div class="product-card reveal">
@@ -751,9 +753,9 @@
           </div>
         </a>
         <div class="product-actions">
-          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10000030&amp;itype=1" target="_blank" rel="noopener" aria-label="お気に入りに追加" title="お気に入りに追加"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></a>
           <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10000030/1.1/" target="_blank" rel="noopener">口コミ<span class="num">56</span>件</a>
           <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00035/" target="_blank" rel="noopener">商品ページへ</a>
+          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10000030&amp;itype=1" target="_blank" rel="noopener" aria-label="お気に入りに追加" title="お気に入りに追加"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></a>
         </div>
       </div>
       <div class="product-card reveal">
@@ -767,9 +769,9 @@
           </div>
         </a>
         <div class="product-actions">
-          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10001004&amp;itype=1" target="_blank" rel="noopener" aria-label="お気に入りに追加" title="お気に入りに追加"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></a>
           <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10001004/1.1/" target="_blank" rel="noopener">口コミ<span class="num">21</span>件</a>
           <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00372/" target="_blank" rel="noopener">商品ページへ</a>
+          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10001004&amp;itype=1" target="_blank" rel="noopener" aria-label="お気に入りに追加" title="お気に入りに追加"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></a>
         </div>
       </div>
     </div>
@@ -795,9 +797,9 @@
           </div>
         </a>
         <div class="product-actions">
-          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10000918&amp;itype=1" target="_blank" rel="noopener" aria-label="お気に入りに追加" title="お気に入りに追加"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></a>
           <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10000918/1.1/" target="_blank" rel="noopener">口コミ<span class="num">34</span>件</a>
           <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/bgoods-00327/" target="_blank" rel="noopener">商品ページへ</a>
+          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10000918&amp;itype=1" target="_blank" rel="noopener" aria-label="お気に入りに追加" title="お気に入りに追加"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></a>
         </div>
       </div>
       <div class="product-card reveal">
@@ -811,9 +813,9 @@
           </div>
         </a>
         <div class="product-actions">
-          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10000537&amp;itype=1" target="_blank" rel="noopener" aria-label="お気に入りに追加" title="お気に入りに追加"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></a>
           <a class="product-reviews" href="https://review.rakuten.co.jp/item/1/422856_10000537/1.1/" target="_blank" rel="noopener">口コミ<span class="num">9</span>件</a>
           <a class="product-detail" href="https://item.rakuten.co.jp/babuuu/toy-00043/" target="_blank" rel="noopener">商品ページへ</a>
+          <a class="product-fav" href="https://my.bookmark.rakuten.co.jp/?func=reg&amp;svid=101&amp;shop_bid=422856&amp;iid=10000537&amp;itype=1" target="_blank" rel="noopener" aria-label="お気に入りに追加" title="お気に入りに追加"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.7 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></a>
         </div>
       </div>
     </div>
